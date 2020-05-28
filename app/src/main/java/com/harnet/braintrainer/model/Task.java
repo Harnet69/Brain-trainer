@@ -19,4 +19,18 @@ public class Task {
 
         return String.format("%d %s %d", num1, operator, num2);
     }
+
+    // calculate result
+    public int calculateResult(){
+        int result = 0;
+        switch(operator){
+            case "+": result = num1 + num2;
+            break;
+            case "-": result = num1 - num2;
+            break;
+            case "*": result = num1 * num2;
+            break;
+        }
+        return result;
+    }
 }

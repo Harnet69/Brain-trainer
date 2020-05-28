@@ -16,4 +16,8 @@ public class TaskController {
     public void showNewTask(){
         taskTextView.setText(task.generateTask());
     }
+
+    public int getTaskResult(){
+        return task.calculateResult();
+    }
 }

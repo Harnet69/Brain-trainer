@@ -31,8 +31,10 @@ public class GameController {
                 timerController.startTimer(taskTextView, goBtn);// start the countDown timer
                 taskController.showNewTask();// create a new task
 //                scoreController.addScore(false);//test score system WORKS
+//                taskController.getTaskResult(); // WORKS
             }
         });
     }
     // TODO Implement score controller which add score after click answer
+
 }
