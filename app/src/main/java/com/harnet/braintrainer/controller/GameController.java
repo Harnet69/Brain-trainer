@@ -58,7 +58,11 @@ public class GameController {
                 subView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println(subView.getTag());
+                        if(Integer.parseInt((String) subView.getTag()) == rightResult){
+                            scoreController.addScore(true);
+                        }else {
+                            scoreController.addScore(false);
+                        }
                     }
                 });
             }
