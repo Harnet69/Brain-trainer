@@ -4,23 +4,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.harnet.braintrainer.R;
-import com.harnet.braintrainer.model.Game;
 import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
-    private Game game;
+    private int duration = 5;
     private Button goBtn;
     private TextView taskTextView;
     private TimerController timerController;
     private TaskController taskController;
 
-    public GameController(Game game, TextView taskTextView, TextView timerTextView, Button goBtn) {
-        this.game = new Game();
+    public GameController(TextView taskTextView, TextView timerTextView, Button goBtn) {
         this.goBtn = goBtn;
         this.taskTextView = taskTextView;
         taskController = new TaskController(taskTextView);
-        timerController = new TimerController(new Timer(30), timerTextView);
+        timerController = new TimerController(new Timer(duration), timerTextView);
     }
 
     public void startGame() {
@@ -29,16 +26,9 @@ public class GameController {
             @Override
             public void onClick(View v) {
                 goBtn.setVisibility(View.INVISIBLE);
-                timerController.startTimer();// start the countDown timer
+                timerController.startTimer(taskTextView, goBtn);// start the countDown timer
                 taskController.showNewTask();// create a new task
             }
         });
-    }
-
-    public void gameOver(){
-        game.setGameFinish(true);
-        goBtn.setVisibility(View.VISIBLE);
-        timerController.resetTimer();// reset timer
-        taskTextView.setText("");// clear Task View field
     }
 }

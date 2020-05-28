@@ -3,6 +3,7 @@ package com.harnet.braintrainer.controller;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.harnet.braintrainer.model.Timer;
@@ -19,10 +20,11 @@ public class TimerController {
         this.timer = timer;
         this.timerView = timerView;
         this.restTime = timer.getDuration();
+        timerView.setText(String.valueOf(restTime));
     }
 
     // start timer
-    public void startTimer(){
+    public void startTimer(final TextView taskTextView, final Button goBtn){
         new CountDownTimer(restTime * 1000, countDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -33,7 +35,9 @@ public class TimerController {
             @Override
             public void onFinish() {
                 Log.i(TAG, "onFinish: time is up");
-                // TODO find the way to call gameOver method from MainActivity// EventBus
+                goBtn.setVisibility(View.VISIBLE);
+                resetTimer();// reset timer
+                taskTextView.setText("Try again?");
             }
         }.start();
     }
