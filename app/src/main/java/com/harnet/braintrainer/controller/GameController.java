@@ -24,7 +24,7 @@ public class GameController {
         taskController = new TaskController(taskTextView);
         timerController = new TimerController(new Timer(duration), timerTextView);
         scoreController = new ScoreController(scoreTextView);
-        answerController = new AnswerController();
+        answerController = new AnswerController(answerGridLayout);
     }
 
     public void startGame() {
