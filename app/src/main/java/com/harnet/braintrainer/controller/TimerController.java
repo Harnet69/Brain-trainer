@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.harnet.braintrainer.model.Timer;
 
 public class TimerController {
+
     private static final String TAG = "timerController";
     private Timer timer;
     private TextView timerView;
@@ -32,7 +33,13 @@ public class TimerController {
             @Override
             public void onFinish() {
                 Log.i(TAG, "onFinish: time is up");
+                // TODO find the way to call gameOver method from MainActivity// EventBus
             }
         }.start();
+    }
+
+    public void resetTimer(){
+        restTime = timer.getDuration();
+        timerView.setText(String.valueOf(restTime));
     }
 }

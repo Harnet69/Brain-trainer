@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView taskTextView;
     private TimerController timerController;
     private TaskController taskController;
+    private boolean isGameFinish = false;
 
 
     @Override
@@ -28,17 +29,25 @@ public class MainActivity extends AppCompatActivity {
         taskController = new TaskController(taskTextView);
         timerController = new TimerController(new Timer(30), timerTextView);
         goBtn = findViewById(R.id.goButton);
-        goGame();
+        startGame();
     }
 
-    private void goGame(){
+    private void startGame() {
+        goBtn.setOnClickListener(null);
         goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goBtn.setVisibility(View.INVISIBLE);
-                timerController.startTimer();
-                taskController.showNewTask();
+                    goBtn.setVisibility(View.INVISIBLE);
+                    timerController.startTimer();// start the countDown timer
+                    taskController.showNewTask();// create a new task
             }
         });
+    }
+
+    public void gameOver(){
+        isGameFinish = true;
+        goBtn.setVisibility(View.VISIBLE);
+        timerController.resetTimer();// reset timer
+        taskTextView.setText("");// clear Task View field
     }
 }
