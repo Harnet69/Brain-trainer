@@ -12,6 +12,7 @@ public class GameController {
     private int duration = 5;
     private Button goBtn;
     private TextView taskTextView;
+    private GridLayout answerGridLayout;
     private TimerController timerController;
     private TaskController taskController;
     private ScoreController scoreController;
@@ -21,8 +22,9 @@ public class GameController {
     public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, Button goBtn, GridLayout answerGridLayout) {
         this.goBtn = goBtn;
         this.taskTextView = taskTextView;
+        this.answerGridLayout = answerGridLayout;
         taskController = new TaskController(taskTextView);
-        timerController = new TimerController(new Timer(duration), timerTextView);
+        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout);
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
     }
@@ -33,6 +35,7 @@ public class GameController {
             @Override
             public void onClick(View v) {
                 goBtn.setVisibility(View.INVISIBLE);
+                answerGridLayout.setVisibility(View.VISIBLE);
                 timerController.startTimer(taskTextView, goBtn);// start the countDown timer
                 rightResult = taskController.showNewTask();// create a new task
                 answerController.generateAnswers(rightResult); // TODO generate results with one right result

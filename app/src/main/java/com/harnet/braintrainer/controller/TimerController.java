@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.gridlayout.widget.GridLayout;
+
 import com.harnet.braintrainer.model.Timer;
 
 public class TimerController {
@@ -13,12 +15,14 @@ public class TimerController {
     private static final String TAG = "timerController";
     private Timer timer;
     private TextView timerView;
+    private GridLayout answerGridLayout;
     private int restTime; // time for doing assignment
     private int countDownInterval = 1000; // count in seconds
 
-    public TimerController(Timer timer, TextView timerView) {
+    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout) {
         this.timer = timer;
         this.timerView = timerView;
+        this.answerGridLayout = answerGridLayout;
         this.restTime = timer.getDuration();
         timerView.setText(String.valueOf(restTime));
     }
@@ -38,6 +42,8 @@ public class TimerController {
                 goBtn.setVisibility(View.VISIBLE);
                 resetTimer();// reset timer
                 taskTextView.setText("Try again?");
+                answerGridLayout.setVisibility(View.INVISIBLE);
+
             }
         }.start();
     }
