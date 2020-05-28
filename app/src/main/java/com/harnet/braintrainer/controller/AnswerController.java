@@ -4,10 +4,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 public class AnswerController {
@@ -17,8 +13,8 @@ public class AnswerController {
         this.answerGridLayout = answerGridLayout;
     }
 
+    // add texts and tags to buttons with numbers from answers array
     public void generateAnswers(int rightResult){
-        System.out.println(rightResult);// TODO generate tags with results for four cells one is correct
         int[] answers = new int[answerGridLayout.getChildCount()];
         answers = fillAnswersArray(answers, rightResult);
         for (int i = 0; i < answerGridLayout.getChildCount(); i++) {
@@ -30,6 +26,7 @@ public class AnswerController {
         }
     }
 
+    // add to answers array one correct answer and mix it with incorrect
     private int[] fillAnswersArray(int[] answers, int rightResult){
         Random rand = new Random();
         int maxBound = (int) ((Math.abs(rightResult)*1.2)+rand.nextInt(10));
@@ -59,10 +56,25 @@ public class AnswerController {
         return answers;
     }
 
+    // check if all elements are unique
     private boolean isNumInArray(int[] answers, int i){
         for(int num : answers){
             return i == num;
         }
         return false;
     }
+
+//    public void addClickListenerToBtns(){
+//        for (int i = 0; i < answerGridLayout.getChildCount(); i++) {
+//            final View subView = answerGridLayout.getChildAt(i);
+//            if (subView instanceof TextView) {
+//                subView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        System.out.println(subView.getTag());
+//                    }
+//                });
+//            }
+//        }
+//    }
 }
