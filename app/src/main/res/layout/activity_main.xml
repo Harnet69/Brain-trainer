@@ -43,7 +43,7 @@
         android:background="@android:color/holo_green_light"
         android:padding="12dp"
         android:text="0/0"
-        android:textSize="40sp"
+        android:textSize="38sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textSize="50sp"
+        android:textSize="40sp"
         app:layout_constraintEnd_toStartOf="@+id/scoreTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/timerTextView"

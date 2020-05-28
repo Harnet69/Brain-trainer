@@ -40,6 +40,7 @@ public class GameController {
                 rightResult = taskController.showNewTask();// create a new task
                 answerController.generateAnswers(rightResult); // TODO generate results with one right result
                 addClickListenerToBtns();
+                scoreController.resetScore();
 //                scoreController.addScore(false);//test score system WORKS
 //                taskController.getTaskResult(); // WORKS
             }

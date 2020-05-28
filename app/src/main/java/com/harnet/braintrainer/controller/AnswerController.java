@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
+
 import java.util.Random;
 
 public class AnswerController {
@@ -14,7 +15,7 @@ public class AnswerController {
     }
 
     // add texts and tags to buttons with numbers from answers array
-    public void generateAnswers(int rightResult){
+    public void generateAnswers(int rightResult) {
         int[] answers = new int[answerGridLayout.getChildCount()];
         answers = fillAnswersArray(answers, rightResult);
         for (int i = 0; i < answerGridLayout.getChildCount(); i++) {
@@ -27,27 +28,20 @@ public class AnswerController {
     }
 
     // add to answers array one correct answer and mix it with incorrect
-    private int[] fillAnswersArray(int[] answers, int rightResult){
+    private int[] fillAnswersArray(int[] answers, int rightResult) {
         Random rand = new Random();
-        int maxBound = 0;
-        while(maxBound <=0){
-            maxBound = (int) ((Math.abs(rightResult)*1.2)+rand.nextInt(10));
-        }
-        for(int i = 0; i < answers.length; i++){
-            if(i == 0){
-                answers[i] = rightResult;
-            }else{
-                answers[i] = rand.nextInt(maxBound);
-                if(isNumInArray(answers, answers[i])){
-                    i--;
-                }
+        answers[0] = rightResult;
+        for (int i = 1; i < answers.length; i++) {
+            answers[i] = rand.nextInt(rightResult+10)-(rightResult-2);
+            if (isNumInArray(answers, answers[i])) {
+                answers[i]+=1;
             }
         }
         return shuffleAnswers(answers);
     }
 
     // shuffle answers array
-    private int[] shuffleAnswers(int[] answers){
+    private int[] shuffleAnswers(int[] answers) {
         Random rand = new Random();
         int answersLength = answers.length;
         for (int i = 0; i < answersLength; i++) {
@@ -60,24 +54,10 @@ public class AnswerController {
     }
 
     // check if all elements are unique
-    private boolean isNumInArray(int[] answers, int i){
-        for(int num : answers){
+    private boolean isNumInArray(int[] answers, int i) {
+        for (int num : answers) {
             return i == num;
         }
         return false;
     }
-
-//    public void addClickListenerToBtns(){
-//        for (int i = 0; i < answerGridLayout.getChildCount(); i++) {
-//            final View subView = answerGridLayout.getChildAt(i);
-//            if (subView instanceof TextView) {
-//                subView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        System.out.println(subView.getTag());
-//                    }
-//                });
-//            }
-//        }
-//    }
 }

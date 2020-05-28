@@ -34,17 +34,19 @@ public class TimerController {
             public void onTick(long millisUntilFinished) {
                 restTime -= countDownInterval/1000;
                 timerView.setText(String.valueOf(restTime));
+                if(restTime < 1){
+                    answerGridLayout.setVisibility(View.INVISIBLE); // prevent input after game finish
+                }
             }
 
             @Override
             public void onFinish() {
+                answerGridLayout.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onFinish: time is up");
                 goBtn.setVisibility(View.VISIBLE);
-                resetTimer();// reset timer
                 taskTextView.setText("Try again?");
-                answerGridLayout.setVisibility(View.INVISIBLE);
-                scoreController.resetScore();
-
+                resetTimer();// reset timer
+//                scoreController.resetScore();
             }
         }.start();
     }
