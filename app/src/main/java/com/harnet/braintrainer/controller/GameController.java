@@ -12,12 +12,14 @@ public class GameController {
     private TextView taskTextView;
     private TimerController timerController;
     private TaskController taskController;
+    private ScoreController scoreController;
 
-    public GameController(TextView taskTextView, TextView timerTextView, Button goBtn) {
+    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, Button goBtn) {
         this.goBtn = goBtn;
         this.taskTextView = taskTextView;
         taskController = new TaskController(taskTextView);
         timerController = new TimerController(new Timer(duration), timerTextView);
+        scoreController = new ScoreController(scoreTextView);
     }
 
     public void startGame() {
@@ -28,7 +30,9 @@ public class GameController {
                 goBtn.setVisibility(View.INVISIBLE);
                 timerController.startTimer(taskTextView, goBtn);// start the countDown timer
                 taskController.showNewTask();// create a new task
+//                scoreController.addScore(false);//test score system WORKS
             }
         });
     }
+    // TODO Implement score controller which add score after click answer
 }
