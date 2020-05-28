@@ -6,4 +6,8 @@ public class Timer {
     public Timer(int duration) {
         this.duration = duration;
     }
+
+    public int getDuration() {
+        return duration;
+    }
 }
