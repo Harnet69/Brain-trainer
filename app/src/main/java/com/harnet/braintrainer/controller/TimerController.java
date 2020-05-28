@@ -28,7 +28,7 @@ public class TimerController {
     }
 
     // start timer
-    public void startTimer(final TextView taskTextView, final Button goBtn){
+    public void startTimer(final TextView taskTextView, final Button goBtn, final ScoreController scoreController){
         new CountDownTimer(restTime * 1000, countDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -43,6 +43,7 @@ public class TimerController {
                 resetTimer();// reset timer
                 taskTextView.setText("Try again?");
                 answerGridLayout.setVisibility(View.INVISIBLE);
+                scoreController.resetScore();
 
             }
         }.start();

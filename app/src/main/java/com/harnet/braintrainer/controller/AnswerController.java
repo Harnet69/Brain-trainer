@@ -29,7 +29,10 @@ public class AnswerController {
     // add to answers array one correct answer and mix it with incorrect
     private int[] fillAnswersArray(int[] answers, int rightResult){
         Random rand = new Random();
-        int maxBound = (int) ((Math.abs(rightResult)*1.2)+rand.nextInt(10));
+        int maxBound = 0;
+        while(maxBound <=0){
+            maxBound = (int) ((Math.abs(rightResult)*1.2)+rand.nextInt(10));
+        }
         for(int i = 0; i < answers.length; i++){
             if(i == 0){
                 answers[i] = rightResult;

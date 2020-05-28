@@ -36,7 +36,7 @@ public class GameController {
             public void onClick(View v) {
                 goBtn.setVisibility(View.INVISIBLE);
                 answerGridLayout.setVisibility(View.VISIBLE);
-                timerController.startTimer(taskTextView, goBtn);// start the countDown timer
+                timerController.startTimer(taskTextView, goBtn, scoreController);// start the countDown timer
                 rightResult = taskController.showNewTask();// create a new task
                 answerController.generateAnswers(rightResult); // TODO generate results with one right result
                 addClickListenerToBtns();
@@ -63,6 +63,9 @@ public class GameController {
                         }else {
                             scoreController.addScore(false);
                         }
+                        //TODO refresh a task
+                        rightResult = taskController.showNewTask();// create a new task
+                        answerController.generateAnswers(rightResult);// generate new answers
                     }
                 });
             }

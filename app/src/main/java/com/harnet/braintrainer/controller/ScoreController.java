@@ -21,8 +21,16 @@ public class ScoreController {
         updateScoreView();
     }
 
+    public void resetScore(){
+        rightAnswers = 0;
+        wrongAnswers = 0;
+        updateScoreView();
+    }
+
     @SuppressLint("DefaultLocale")
     private void updateScoreView(){
         scoreTextView.setText(String.format("%d/%d", rightAnswers, wrongAnswers));
     }
+
+
 }
