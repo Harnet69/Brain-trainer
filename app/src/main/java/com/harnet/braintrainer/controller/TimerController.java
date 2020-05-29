@@ -66,7 +66,6 @@ public class TimerController {
                 Game.getInstance().setGame(false);
                 gearController.cancelPosition();
                 timerView.setTextColor(timerViewTextColor);
-                //TODO something wrong here
                 levelController.addNextLevel(scoreController.getRightAnswers(), scoreController.getWrongAnswers()); // add or not new  level
             }
         }.start();

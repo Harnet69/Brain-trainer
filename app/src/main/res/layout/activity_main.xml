@@ -153,20 +153,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/brain_score_ico" />
+            app:srcCompat="@drawable/brain_score_ico"
+            android:visibility="invisible"/>
 
         <ImageView
             android:id="@+id/level2ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/brain_score_ico" />
+            app:srcCompat="@drawable/brain_score_ico"
+            android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/level3ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/brain_score_ico" />
+            app:srcCompat="@drawable/brain_score_ico"
+            android:visibility="invisible" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
