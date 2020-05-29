@@ -44,7 +44,7 @@ public class TimerController {
                 answerGridLayout.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onFinish: time is up");
                 goBtn.setVisibility(View.VISIBLE);
-                taskTextView.setText("Try again?");
+                taskTextView.setText("Again?");
                 resetTimer();// reset timer
 //                scoreController.resetScore();
             }
