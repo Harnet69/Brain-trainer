@@ -137,4 +137,36 @@
             app:layout_row="2" />
 
     </androidx.gridlayout.widget.GridLayout>
+
+    <LinearLayout
+        android:id="@+id/levelView"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/level1ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/brain_score_ico" />
+
+        <ImageView
+            android:id="@+id/level2ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/brain_score_ico" />
+
+        <ImageView
+            android:id="@+id/level3ImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/brain_score_ico" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
