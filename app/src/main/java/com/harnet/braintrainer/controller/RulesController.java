@@ -2,8 +2,6 @@ package com.harnet.braintrainer.controller;
 import android.widget.TextView;
 
 public class RulesController {
-    private TextView textView;
-    private int rightResult;
 
     // check result of single task
     public boolean checkSingleResult(TextView textView, int rightResult) {
@@ -12,6 +10,9 @@ public class RulesController {
 
     // wrong answers <=3 and <10% of all answers
     public boolean checkGameSessionResult(int rightAnswers, int wrongAnswers){
-        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 10 && wrongAnswers <=3;
+        if(rightAnswers == 0 && wrongAnswers == 0){
+            return false;
+        }
+        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 10 && wrongAnswers <=3 && rightAnswers >= 10;
     }
 }

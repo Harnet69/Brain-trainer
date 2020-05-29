@@ -20,11 +20,11 @@ public class GearController {
     }
 
     public void startSpinning(int spinDuration){
-        gearImageView.animate().rotationBy(3600).translationXBy(-40).translationYBy(+500).setDuration(spinDuration*1000)
+        gearImageView.animate().rotationBy(3600).translationXBy(-40).translationYBy(+350).setDuration(spinDuration*1000)
                 .setInterpolator(new LinearInterpolator());
     }
 
     public void cancelPosition(){
-        gearImageView.animate().rotationBy(-360).translationXBy(40).translationYBy(-500).setDuration(500);
+        gearImageView.animate().rotationBy(-360).translationXBy(40).translationYBy(-350).setDuration(500);
     }
 }
