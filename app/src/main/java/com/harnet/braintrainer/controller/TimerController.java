@@ -1,5 +1,6 @@
 package com.harnet.braintrainer.controller;
 
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ public class TimerController {
     private GearController gearController;
     private int restTime; // time for doing assignment
     private int countDownInterval = 1000; // count in seconds
+    private int timerViewTextColor;
 
     public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController) {
         this.timer = timer;
@@ -29,6 +31,7 @@ public class TimerController {
         this.restTime = timer.getDuration();
         this.gearController = gearController;
         timerView.setText(String.valueOf(restTime));
+        this.timerViewTextColor = timerView.getCurrentTextColor();
     }
 
     public int getTimerDuration(){
@@ -42,6 +45,9 @@ public class TimerController {
             public void onTick(long millisUntilFinished) {
                 restTime -= countDownInterval/1000;
                 timerView.setText(String.valueOf(restTime));
+                if(restTime <=5){
+                    timerView.setTextColor(Color.parseColor("#fc0313"));
+                }
                 if(restTime < 1){
                     answerGridLayout.setVisibility(View.INVISIBLE); // prevent input after game finish
                 }
@@ -55,6 +61,7 @@ public class TimerController {
                 resetTimer();// reset timer
                 Game.getInstance().setGame(false);
                 gearController.cancelPosition();
+                timerView.setTextColor(timerViewTextColor);
             }
         }.start();
     }
