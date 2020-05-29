@@ -32,10 +32,9 @@ public class MainActivity extends AppCompatActivity {
         timerTextView = findViewById(R.id.timerTextView);
         scoreTextView = findViewById(R.id.scoreTextView);
         answerGridLayout = (GridLayout) findViewById(R.id.answerGridLayout);
-        goBtn = findViewById(R.id.goButton);
         gearImageView = findViewById(R.id.gearImageView);
 
-        gameController = new GameController(taskTextView, timerTextView, scoreTextView, goBtn, answerGridLayout, gearImageView);
+        gameController = new GameController(taskTextView, timerTextView, scoreTextView, answerGridLayout, gearImageView);
 
         gameController.startGame();
     }

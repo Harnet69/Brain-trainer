@@ -12,7 +12,6 @@ import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
     private int duration = 20;
-    private Button goBtn;
     private TextView taskTextView;
     private GridLayout answerGridLayout;
     private ImageView gearImageView;
@@ -24,8 +23,7 @@ public class GameController {
     private GearController gearController;
     private int rightResult;
 
-    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, Button goBtn, GridLayout answerGridLayout, ImageView gearImageView) {
-        this.goBtn = goBtn;
+    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView) {
         this.taskTextView = taskTextView;
         this.answerGridLayout = answerGridLayout;
         this.gearImageView = gearImageView;
@@ -36,16 +34,6 @@ public class GameController {
         checkController = new GameRulesController();
         gearController = new GearController(gearImageView);
     }
-
-//    public void startGame() {
-//        goBtn.setOnClickListener(null);
-//        goBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startNewGame();
-//            }
-//        });
-//    }
 
     public void startGame() {
         gearImageView.setOnClickListener(null);
@@ -62,9 +50,8 @@ public class GameController {
 
     // new game start
     private void startNewGame(){
-        goBtn.setVisibility(View.INVISIBLE);
         answerGridLayout.setVisibility(View.VISIBLE);
-        timerController.startTimer(taskTextView, goBtn, scoreController);// start the countDown timer
+        timerController.startTimer(taskTextView, scoreController);// start the countDown timer
         rightResult = taskController.showNewTask();// create a new task and return the result
         answerController.generateAnswers(rightResult); // T
         addClickListenerToBtns();

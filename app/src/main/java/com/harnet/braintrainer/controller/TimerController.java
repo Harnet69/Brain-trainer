@@ -33,7 +33,7 @@ public class TimerController {
     }
 
     // start timer
-    public void startTimer(final TextView taskTextView, final Button goBtn, final ScoreController scoreController){
+    public void startTimer(final TextView taskTextView, final ScoreController scoreController){
         new CountDownTimer(restTime * 1000, countDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -48,7 +48,6 @@ public class TimerController {
             public void onFinish() {
                 answerGridLayout.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onFinish: time is up");
-                goBtn.setVisibility(View.VISIBLE);
                 taskTextView.setText("Again?");
                 resetTimer();// reset timer
                 Game.getInstance().setGame(false);
