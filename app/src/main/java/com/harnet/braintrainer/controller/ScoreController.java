@@ -12,6 +12,14 @@ public class ScoreController {
         this.scoreTextView = scoreTextView;
     }
 
+    public int getRightAnswers() {
+        return rightAnswers;
+    }
+
+    public int getWrongAnswers() {
+        return wrongAnswers;
+    }
+
     // add score to scores counter
     public void addScore(Boolean isAnswerRight){
         if(isAnswerRight){

@@ -23,15 +23,19 @@ public class TimerController {
     private int restTime; // time for doing assignment
     private int countDownInterval = 1000; // count in seconds
     private int timerViewTextColor;
+    private LevelController levelController; // control level of game
+    private ScoreController scoreController;
 
-    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController) {
+    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController, LevelController levelController, ScoreController scoreController) {
         this.timer = timer;
         this.timerView = timerView;
         this.answerGridLayout = answerGridLayout;
         this.restTime = timer.getDuration();
         this.gearController = gearController;
+        this.levelController = levelController;
         timerView.setText(String.valueOf(restTime));
         this.timerViewTextColor = timerView.getCurrentTextColor();
+        this.scoreController = scoreController;
     }
 
     public int getTimerDuration(){
@@ -62,6 +66,8 @@ public class TimerController {
                 Game.getInstance().setGame(false);
                 gearController.cancelPosition();
                 timerView.setTextColor(timerViewTextColor);
+                //TODO something wrong here
+                levelController.addNextLevel(scoreController.getRightAnswers(), scoreController.getWrongAnswers()); // add or not new  level
             }
         }.start();
     }
