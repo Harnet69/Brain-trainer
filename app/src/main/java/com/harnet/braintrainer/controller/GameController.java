@@ -17,7 +17,7 @@ public class GameController {
     private TaskController taskController;
     private ScoreController scoreController;
     private AnswerController answerController;
-    private CheckController checkController;
+    private GameRulesController checkController;
     private int rightResult;
 
     public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, Button goBtn, GridLayout answerGridLayout) {
@@ -28,7 +28,7 @@ public class GameController {
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout);
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
-        checkController = new CheckController();
+        checkController = new GameRulesController();
     }
 
     public void startGame() {
@@ -36,20 +36,21 @@ public class GameController {
         goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goBtn.setVisibility(View.INVISIBLE);
-                answerGridLayout.setVisibility(View.VISIBLE);
-                timerController.startTimer(taskTextView, goBtn, scoreController);// start the countDown timer
-                rightResult = taskController.showNewTask();// create a new task
-                answerController.generateAnswers(rightResult); // TODO generate results with one right result
-                addClickListenerToBtns();
-                scoreController.resetScore();
-//                scoreController.addScore(false);//test score system WORKS
-//                taskController.getTaskResult(); // WORKS
+                startNewGame();
             }
         });
     }
-    // TODO Implement score controller which add score after click answer
 
+    // new game start
+    private void startNewGame(){
+        goBtn.setVisibility(View.INVISIBLE);
+        answerGridLayout.setVisibility(View.VISIBLE);
+        timerController.startTimer(taskTextView, goBtn, scoreController);// start the countDown timer
+        rightResult = taskController.showNewTask();// create a new task and return the result
+        answerController.generateAnswers(rightResult); // T
+        addClickListenerToBtns();
+        scoreController.resetScore();
+    }
 
     // add click listeners to buttons
     public void addClickListenerToBtns(){
@@ -59,15 +60,16 @@ public class GameController {
                 subView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        serveAMove((TextView) subView);
+                        serveMovement((TextView) subView);
                     }
                 });
             }
         }
     }
 
+
     // preform a move
-    private void serveAMove(TextView viewWithResult){
+    private void serveMovement(TextView viewWithResult){
         boolean isAnswerRight = checkController.checkResult(viewWithResult, rightResult);//check users move
         scoreController.addScore(isAnswerRight);// add a score
         rightResult = taskController.showNewTask();// create a new task

@@ -12,6 +12,7 @@ public class ScoreController {
         this.scoreTextView = scoreTextView;
     }
 
+    // add score to scores counter
     public void addScore(Boolean isAnswerRight){
         if(isAnswerRight){
             rightAnswers++;
@@ -21,12 +22,14 @@ public class ScoreController {
         updateScoreView();
     }
 
+    // reset scores
     public void resetScore(){
         rightAnswers = 0;
         wrongAnswers = 0;
         updateScoreView();
     }
 
+    // update scores view
     @SuppressLint("DefaultLocale")
     private void updateScoreView(){
         scoreTextView.setText(String.format("%d/%d", rightAnswers, wrongAnswers));

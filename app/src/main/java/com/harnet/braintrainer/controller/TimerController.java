@@ -51,6 +51,7 @@ public class TimerController {
         }.start();
     }
 
+    //reset timer
     public void resetTimer(){
         restTime = timer.getDuration();
         timerView.setText(String.valueOf(restTime));

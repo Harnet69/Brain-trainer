@@ -9,6 +9,7 @@ public class Task {
     private int num2;
     private String operator;
 
+    // generate a task
     @SuppressLint("DefaultLocale")
     public String generateTask(){
         String[] operators = new String[]{"+", "-", "*", "/"};
@@ -26,6 +27,7 @@ public class Task {
             if(num1 == 0){
                 num1 = 1;
             }
+//            num1 = (num1 == 0)? 1 : tempNum; // cause a app crash
             taskString = String.format("%d %s %d", num2, operator, num1);
         }
 
