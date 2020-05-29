@@ -3,6 +3,7 @@ package com.harnet.braintrainer.view;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView taskTextView;
     private TextView scoreTextView;
     private GridLayout answerGridLayout; // TODO find how can we cast it ti Grid Layout
+    private ImageView gearImageView;
 
     private GameController gameController;
 
@@ -31,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         answerGridLayout = (GridLayout) findViewById(R.id.answerGridLayout);
         goBtn = findViewById(R.id.goButton);
+        gearImageView = findViewById(R.id.gearImageView);
 
-        gameController = new GameController(taskTextView, timerTextView, scoreTextView, goBtn, answerGridLayout);
+        gameController = new GameController(taskTextView, timerTextView, scoreTextView, goBtn, answerGridLayout, gearImageView);
 
         gameController.startGame();
     }

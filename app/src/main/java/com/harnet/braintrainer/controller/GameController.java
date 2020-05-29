@@ -2,6 +2,7 @@ package com.harnet.braintrainer.controller;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
@@ -9,26 +10,30 @@ import androidx.gridlayout.widget.GridLayout;
 import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
-    private int duration = 20;
+    private int duration = 10;
     private Button goBtn;
     private TextView taskTextView;
     private GridLayout answerGridLayout;
+    private ImageView gearImageView;
     private TimerController timerController;
     private TaskController taskController;
     private ScoreController scoreController;
     private AnswerController answerController;
     private GameRulesController checkController;
+    private GearController gearController;
     private int rightResult;
 
-    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, Button goBtn, GridLayout answerGridLayout) {
+    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, Button goBtn, GridLayout answerGridLayout, ImageView gearImageView) {
         this.goBtn = goBtn;
         this.taskTextView = taskTextView;
         this.answerGridLayout = answerGridLayout;
+        this.gearImageView = gearImageView;
         taskController = new TaskController(taskTextView);
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout);
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
         checkController = new GameRulesController();
+        gearController = new GearController(gearImageView);
     }
 
     public void startGame() {
@@ -50,6 +55,7 @@ public class GameController {
         answerController.generateAnswers(rightResult); // T
         addClickListenerToBtns();
         scoreController.resetScore();
+        gearController.startSpinning(timerController.getTimerDuration());
     }
 
     // add click listeners to buttons

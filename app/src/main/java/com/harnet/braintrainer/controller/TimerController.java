@@ -27,6 +27,10 @@ public class TimerController {
         timerView.setText(String.valueOf(restTime));
     }
 
+    public int getTimerDuration(){
+        return timer.getDuration();
+    }
+
     // start timer
     public void startTimer(final TextView taskTextView, final Button goBtn, final ScoreController scoreController){
         new CountDownTimer(restTime * 1000, countDownInterval) {
