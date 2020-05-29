@@ -20,7 +20,7 @@ public class GameController {
     private TaskController taskController;
     private ScoreController scoreController;
     private AnswerController answerController;
-    private GameRulesController checkController;
+    private RulesController rulesController;
     private GearController gearController;
     private LevelController levelController;
     private int rightResult;
@@ -33,9 +33,9 @@ public class GameController {
         taskController = new TaskController(taskTextView);
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
-        checkController = new GameRulesController();
+        rulesController = new RulesController();
         gearController = new GearController(gearImageView);
-        levelController = new LevelController(levelView); // level controller
+        levelController = new LevelController(levelView, rulesController); // level controller
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController);
     }
 
@@ -81,7 +81,7 @@ public class GameController {
 
     // preform a move
     private void serveMovement(TextView viewWithResult){
-        boolean isAnswerRight = checkController.checkSingleResult(viewWithResult, rightResult);//check users move
+        boolean isAnswerRight = rulesController.checkSingleResult(viewWithResult, rightResult);//check users move
         scoreController.addScore(isAnswerRight);// add a score
         rightResult = taskController.showNewTask();// create a new task
         answerController.generateAnswers(rightResult);// generate new answers

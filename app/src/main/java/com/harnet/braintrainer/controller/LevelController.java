@@ -3,16 +3,15 @@ package com.harnet.braintrainer.controller;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class LevelController {
     private int currentLevel;
     private LinearLayout levelView;
-    private GameRulesController gameRulesController;
+    private RulesController gameRulesController;
 
-    public LevelController(LinearLayout levelView) {
+    public LevelController(LinearLayout levelView, RulesController gameRulesController) {
         this.levelView = levelView;
-        gameRulesController = new GameRulesController();
+        this.gameRulesController = gameRulesController;
     }
 
     public int getCurrentLevel() {

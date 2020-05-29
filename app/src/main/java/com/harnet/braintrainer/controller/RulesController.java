@@ -1,7 +1,7 @@
 package com.harnet.braintrainer.controller;
 import android.widget.TextView;
 
-public class GameRulesController {
+public class RulesController {
     private TextView textView;
     private int rightResult;
 
