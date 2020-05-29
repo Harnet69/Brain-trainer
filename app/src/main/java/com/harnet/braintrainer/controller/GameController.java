@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
 
+import com.harnet.braintrainer.model.Game;
 import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
@@ -36,12 +37,25 @@ public class GameController {
         gearController = new GearController(gearImageView);
     }
 
+//    public void startGame() {
+//        goBtn.setOnClickListener(null);
+//        goBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startNewGame();
+//            }
+//        });
+//    }
+
     public void startGame() {
-        goBtn.setOnClickListener(null);
-        goBtn.setOnClickListener(new View.OnClickListener() {
+        gearImageView.setOnClickListener(null);
+        gearImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startNewGame();
+                if(!Game.getInstance().isGame()){
+                    startNewGame();
+                    Game.getInstance().setGame(true);
+                }
             }
         });
     }

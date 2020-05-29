@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
 
+import com.harnet.braintrainer.model.Game;
 import com.harnet.braintrainer.model.Timer;
 
 public class TimerController {
@@ -50,6 +51,7 @@ public class TimerController {
                 goBtn.setVisibility(View.VISIBLE);
                 taskTextView.setText("Again?");
                 resetTimer();// reset timer
+                Game.getInstance().setGame(false);
 //                scoreController.resetScore();
             }
         }.start();
