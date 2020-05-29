@@ -10,7 +10,7 @@ import androidx.gridlayout.widget.GridLayout;
 import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
-    private int duration = 10;
+    private int duration = 20;
     private Button goBtn;
     private TextView taskTextView;
     private GridLayout answerGridLayout;
