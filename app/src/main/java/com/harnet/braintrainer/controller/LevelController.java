@@ -18,14 +18,14 @@ public class LevelController {
 
     public void addNextLevel(int rightAnswers, int wrongAnswers){
         if(gameRulesController.checkGameSessionResult(rightAnswers, wrongAnswers)){
-            currentLevel++;
+            currentLevel+=1;
             System.out.println("Player won level");
         }
-        System.out.println("Level controller work!");
+        System.out.println("Level" + currentLevel); // TODO works correctly add level.
+                                // TODO Implement showing brains and speed up on next level
     }
 
     public void cancelLevel(){
         currentLevel = 0;
     }
-
 }
