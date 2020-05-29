@@ -4,6 +4,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
@@ -17,14 +18,16 @@ public class TimerController {
     private Timer timer;
     private TextView timerView;
     private GridLayout answerGridLayout;
+    private GearController gearController;
     private int restTime; // time for doing assignment
     private int countDownInterval = 1000; // count in seconds
 
-    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout) {
+    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController) {
         this.timer = timer;
         this.timerView = timerView;
         this.answerGridLayout = answerGridLayout;
         this.restTime = timer.getDuration();
+        this.gearController = gearController;
         timerView.setText(String.valueOf(restTime));
     }
 
@@ -48,10 +51,10 @@ public class TimerController {
             public void onFinish() {
                 answerGridLayout.setVisibility(View.INVISIBLE);
                 Log.i(TAG, "onFinish: time is up");
-                taskTextView.setText("Again?");
+                taskTextView.setText("");
                 resetTimer();// reset timer
                 Game.getInstance().setGame(false);
-//                scoreController.resetScore();
+                gearController.cancelPosition();
             }
         }.start();
     }

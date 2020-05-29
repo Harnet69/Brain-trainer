@@ -28,11 +28,11 @@ public class GameController {
         this.answerGridLayout = answerGridLayout;
         this.gearImageView = gearImageView;
         taskController = new TaskController(taskTextView);
-        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout);
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
         checkController = new GameRulesController();
         gearController = new GearController(gearImageView);
+        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController);
     }
 
     public void startGame() {
