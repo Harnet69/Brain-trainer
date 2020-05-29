@@ -17,6 +17,7 @@ public class GameController {
     private TaskController taskController;
     private ScoreController scoreController;
     private AnswerController answerController;
+    private CheckController checkController;
     private int rightResult;
 
     public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, Button goBtn, GridLayout answerGridLayout) {
@@ -27,6 +28,7 @@ public class GameController {
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout);
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
+        checkController = new CheckController();
     }
 
     public void startGame() {
@@ -48,10 +50,8 @@ public class GameController {
     }
     // TODO Implement score controller which add score after click answer
 
-    public void checkResult(View view){
-        System.out.println(view.getTag());
-    }
 
+    // add click listeners to buttons
     public void addClickListenerToBtns(){
         for (int i = 0; i < answerGridLayout.getChildCount(); i++) {
             final View subView = answerGridLayout.getChildAt(i);
@@ -59,17 +59,18 @@ public class GameController {
                 subView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(Integer.parseInt((String) subView.getTag()) == rightResult){
-                            scoreController.addScore(true);
-                        }else {
-                            scoreController.addScore(false);
-                        }
-                        //TODO refresh a task
-                        rightResult = taskController.showNewTask();// create a new task
-                        answerController.generateAnswers(rightResult);// generate new answers
+                        serveAMove((TextView) subView);
                     }
                 });
             }
         }
+    }
+
+    // preform a move
+    private void serveAMove(TextView viewWithResult){
+        boolean isAnswerRight = checkController.checkResult(viewWithResult, rightResult);//check users move
+        scoreController.addScore(isAnswerRight);// add a score
+        rightResult = taskController.showNewTask();// create a new task
+        answerController.generateAnswers(rightResult);// generate new answers
     }
 }
