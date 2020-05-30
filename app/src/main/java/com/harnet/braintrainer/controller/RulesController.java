@@ -13,6 +13,7 @@ public class RulesController {
         if(rightAnswers == 0 && wrongAnswers == 0){
             return false;
         }
-        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 10 && wrongAnswers <=3 && rightAnswers >= 7;
+        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 10 && wrongAnswers <=3 ;
+        // && rightAnswers >= 7
     }
 }

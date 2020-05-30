@@ -1,6 +1,7 @@
 package com.harnet.braintrainer.controller;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +14,8 @@ import com.harnet.braintrainer.model.Game;
 import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
-    private int duration = 30;
+    private static final String TAG = "GameController";
+    private int duration = 30; // TODO replace to 30
     private TextView taskTextView;
     private GridLayout answerGridLayout;
     private ImageView gearImageView;
@@ -50,6 +52,9 @@ public class GameController {
                 if(!Game.getInstance().isGame()){
                     startNewGame();
                     Game.getInstance().setGame(true);
+                }else{
+                    Log.d(TAG, "onClick: Game Over!!!");
+                    // TODO game over works here!
                 }
             }
         });
@@ -58,8 +63,8 @@ public class GameController {
     // new game start
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void startNewGame(){
-        answerGridLayout.setVisibility(View.VISIBLE);
         timerController.startTimer(taskTextView, scoreController);// start the countDown timer
+        answerGridLayout.setVisibility(View.VISIBLE);
         rightResult = taskController.showNewTask(levelController.getLevel().getMinBound(), levelController.getLevel().getMaxBound());// create a new task and return the result
         answerController.generateAnswers(rightResult);
         addClickListenerToBtns();
@@ -82,7 +87,6 @@ public class GameController {
             }
         }
     }
-
 
     // preform a move
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

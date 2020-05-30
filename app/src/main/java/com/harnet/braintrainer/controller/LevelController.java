@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import com.harnet.braintrainer.model.Level;
 
 public class LevelController {
+    private static final String TAG = "LevelController";
     private Level level;
     private LinearLayout levelView;
     private RulesController gameRulesController;
@@ -21,20 +22,24 @@ public class LevelController {
         return level;
     }
 
-    public void addNextLevel(int rightAnswers, int wrongAnswers){
+    public boolean addNextLevel(int rightAnswers, int wrongAnswers){
         if(gameRulesController.checkGameSessionResult(rightAnswers, wrongAnswers)){
-            level.Up();
+            level.up();
             updateLevelIcons();
+            return true;
         }
-        // TODO works correctly add level.
-                                // TODO Implement showing brains and speed up on next level
+        return false;
     }
 
-    public void cancelLevel(){
+    public void resetLevel(){
         level.setLevelNum(0);
     }
 
-    private void updateLevelIcons(){
+    public void upMultipl(){
+        level.setMultiplicator(level.getMultiplicator() + 1);
+    }
+
+    public void updateLevelIcons(){
         for(int i=0; i< level.getLevelNum() && i< levelView.getChildCount(); i++){
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {
@@ -42,5 +47,20 @@ public class LevelController {
             }
         }
 
+    }
+
+    public void resetLevelIcons(){
+        for(int i=0; i< levelView.getChildCount(); i++){
+            final View subView = levelView.getChildAt(i);
+            if (subView instanceof ImageView) {
+                subView.setVisibility(View.INVISIBLE);
+            }
+        }
+
+    }
+
+    public void resetLevelBounds(){
+        level.setMinBound(level.getMIN_BOUNDS_DEFAULT());
+        level.setMaxBound(level.getMAX_BOUNDS_DEFAULT());
     }
 }

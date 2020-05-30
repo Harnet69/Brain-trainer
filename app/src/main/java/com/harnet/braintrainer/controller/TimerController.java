@@ -25,6 +25,7 @@ public class TimerController {
     private int timerViewTextColor;
     private LevelController levelController; // control level of game
     private ScoreController scoreController;
+    private boolean winCondition;
 
     public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController, LevelController levelController, ScoreController scoreController) {
         this.timer = timer;
@@ -38,21 +39,21 @@ public class TimerController {
         this.scoreController = scoreController;
     }
 
-    public int getTimerDuration(){
+    public int getTimerDuration() {
         return timer.getDuration();
     }
 
     // start timer
-    public void startTimer(final TextView taskTextView, final ScoreController scoreController){
+    public void startTimer(final TextView taskTextView, final ScoreController scoreController) {
         new CountDownTimer(restTime * 1000, countDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
-                restTime -= countDownInterval/1000;
+                restTime -= countDownInterval / 1000;
                 timerView.setText(String.valueOf(restTime));
-                if(restTime <=5){
+                if (restTime <= 5) {
                     timerView.setTextColor(Color.parseColor("#fc0313"));
                 }
-                if(restTime < 1){
+                if (restTime < 1) {
                     answerGridLayout.setVisibility(View.INVISIBLE); // prevent input after game finish
                 }
             }
@@ -66,13 +67,23 @@ public class TimerController {
                 Game.getInstance().setGame(false);
                 gearController.cancelPosition();
                 timerView.setTextColor(timerViewTextColor);
-                levelController.addNextLevel(scoreController.getRightAnswers(), scoreController.getWrongAnswers()); // add or not new  level
+                boolean levelPassed = levelController.addNextLevel(scoreController.getRightAnswers(), scoreController.getWrongAnswers()); // add or not new  level
+                if (levelController.getLevel().getLevelNum() == 10 && levelPassed) { //TODO HARDCODED WIN LEVEL
+                    Game.getInstance().setGame(false);
+                    //TODO separate method levelUp
+                    gearController.winGearImageView(); // change image to the next
+                    levelController.resetLevel();
+                    levelController.resetLevelBounds();
+                    levelController.resetLevelIcons();
+                    levelController.upMultipl();
+                }
+                Log.d(TAG, "Level : " + levelController.getLevel().getLevelNum());
             }
         }.start();
     }
 
     //reset timer
-    public void resetTimer(){
+    public void resetTimer() {
         restTime = timer.getDuration();
         timerView.setText(String.valueOf(restTime));
     }
