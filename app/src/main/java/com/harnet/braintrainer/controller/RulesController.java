@@ -8,11 +8,11 @@ public class RulesController {
         return (Integer.parseInt((String) textView.getTag()) == rightResult);
     }
 
-    // wrong answers <=3 and <10% of all answers
+    // wrong answers <=3 and <10% of all answers & rightAnswers >=7
     public boolean checkGameSessionResult(int rightAnswers, int wrongAnswers){
         if(rightAnswers == 0 && wrongAnswers == 0){
             return false;
         }
-        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 10 && wrongAnswers <=3 && rightAnswers >= 10;
+        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 10 && wrongAnswers <=3 && rightAnswers >= 7;
     }
 }

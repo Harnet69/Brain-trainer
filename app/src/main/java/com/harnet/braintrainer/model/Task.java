@@ -1,22 +1,32 @@
 package com.harnet.braintrainer.model;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Task {
+    private static final String TAG = "Task";
     private int num1;
     private int num2;
     private String operator;
 
     // generate a task
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("DefaultLocale")
-    public String generateTask(){
+    public String generateTask(int minBound, int maxBound){
         String[] operators = new String[]{"+", "-", "*", "/"};
         String taskString = "";
         Random rand = new Random();
-        this.num1 = rand.nextInt(10); // TODO here you can implement the difficulty of a game
-        this.num2 = rand.nextInt(10);
+//        this.num1 = rand.nextInt(10); // TODO here you can implement the difficulty of a game
+//        this.num2 = rand.nextInt(10);
+        Log.d(TAG, "generateTask: "+minBound + " : " +maxBound);
+        this.num1 = ThreadLocalRandom.current().nextInt(minBound, maxBound + 1);
+        this.num2 = ThreadLocalRandom.current().nextInt(minBound, maxBound + 1);
         this.operator = operators[rand.nextInt(operators.length)];
         if(!operator.equals("/")){
             taskString = String.format("%d %s %d", num1, operator, num2);

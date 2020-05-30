@@ -32,7 +32,7 @@ public class AnswerController {
         Random rand = new Random();
         answers[0] = rightResult;
         for (int i = 1; i < answers.length; i++) {
-            answers[i] = rand.nextInt(rightResult+10)-(rightResult-2);
+            answers[i] = rand.nextInt(Math.abs(rightResult+10-(rightResult-2)));
             if (isNumInArray(answers, answers[i])) {
                 answers[i]+=1;
             }

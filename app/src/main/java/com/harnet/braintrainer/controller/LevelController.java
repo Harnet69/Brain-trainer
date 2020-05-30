@@ -4,36 +4,38 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.harnet.braintrainer.model.Level;
+
 public class LevelController {
-    private int currentLevel;
+    private Level level;
     private LinearLayout levelView;
     private RulesController gameRulesController;
 
     public LevelController(LinearLayout levelView, RulesController gameRulesController) {
         this.levelView = levelView;
         this.gameRulesController = gameRulesController;
+        this.level = new Level();
     }
 
-    public int getCurrentLevel() {
-        return currentLevel;
+    public Level getLevel() {
+        return level;
     }
 
     public void addNextLevel(int rightAnswers, int wrongAnswers){
         if(gameRulesController.checkGameSessionResult(rightAnswers, wrongAnswers)){
-            currentLevel+=1;
-            System.out.println("Player won level");
+            level.Up();
             updateLevelIcons();
         }
-        System.out.println("Level" + currentLevel); // TODO works correctly add level.
+        // TODO works correctly add level.
                                 // TODO Implement showing brains and speed up on next level
     }
 
     public void cancelLevel(){
-        currentLevel = 0;
+        level.setLevelNum(0);
     }
 
     private void updateLevelIcons(){
-        for(int i=0; i< currentLevel && i< levelView.getChildCount(); i++){
+        for(int i=0; i< level.getLevelNum() && i< levelView.getChildCount(); i++){
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {
                 subView.setVisibility(View.VISIBLE);
