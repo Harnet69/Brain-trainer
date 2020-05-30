@@ -9,7 +9,8 @@ import com.harnet.braintrainer.model.Level;
 
 public class LevelController {
     private static final String TAG = "LevelController";
-    private int[] levelImages = {R.drawable.gear_score_ico, R.drawable.brain_score_ico};
+    private int[] levelGridImages = {R.drawable.gear_score_ico, R.drawable.brain_score_ico}; // icons for a levels icons grid
+    private int[] levelImages = {R.drawable.gear, R.drawable.brain}; // image for gear spinner
     private Level level;
     private LinearLayout levelView;
     private RulesController gameRulesController;
@@ -18,6 +19,10 @@ public class LevelController {
         this.levelView = levelView;
         this.gameRulesController = gameRulesController;
         this.level = new Level(0);
+    }
+
+    public int[] getLevelImages() {
+        return levelImages;
     }
 
     public Level getLevel() {
@@ -57,7 +62,7 @@ public class LevelController {
         for (int i = 0; i < levelView.getChildCount(); i++) {
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {
-                ((ImageView) subView).setImageResource(levelImages[level.getLevelIco()]); // TODO hardcoded image
+                ((ImageView) subView).setImageResource(levelGridImages[level.getLevelImage()]); // TODO hardcoded image
             }
         }
     }
@@ -78,9 +83,9 @@ public class LevelController {
     }
 
     public void changeLevelIcon(){
-        if(level.getLevelIco()< levelImages.length){
-            level.setLevelIco(level.getLevelIco()+1);
+        if(level.getLevelImage()< levelGridImages.length){
+            level.setLevelImage(level.getLevelImage()+1);
         }
-        System.out.println("Level icon" +level.getLevelIco());
+        System.out.println("Level icon" +level.getLevelImage());
     }
 }

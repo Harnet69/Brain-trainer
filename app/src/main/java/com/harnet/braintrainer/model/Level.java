@@ -1,8 +1,8 @@
 package com.harnet.braintrainer.model;
 
 public class Level {
-    private int levelIco;
-    private int levelNum = 0;
+    private int levelImage;
+    private int levelNum = 9;
     private int timerDuration = 20;
     private final int MIN_BOUNDS_DEFAULT = 0;
     private final int MAX_BOUNDS_DEFAULT = 5;
@@ -11,19 +11,19 @@ public class Level {
     private int multiplicator = 2;
 
     public Level(int levelIco) {
-        this.levelIco = levelIco;
+        this.levelImage = levelIco;
     }
 
     public int getLevelNum() {
         return levelNum;
     }
 
-    public int getLevelIco() {
-        return levelIco;
+    public int getLevelImage() {
+        return levelImage;
     }
 
-    public void setLevelIco(int levelIco) {
-        this.levelIco = levelIco;
+    public void setLevelImage(int levelImage) {
+        this.levelImage = levelImage;
     }
 
     public void setMinBound(int minBound) {

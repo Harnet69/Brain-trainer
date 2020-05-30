@@ -25,7 +25,7 @@ public class GameController {
     private ScoreController scoreController;
     private AnswerController answerController;
     private RulesController rulesController;
-    private GearController gearController;
+    private GearController gearController; // TODO add method for changing gearImage
     private LevelController levelController;
     private int rightResult;
 
@@ -37,8 +37,8 @@ public class GameController {
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
         rulesController = new RulesController();
-        gearController = new GearController(gearImageView);
         levelController = new LevelController(levelView, rulesController); // level controller
+        gearController = new GearController(gearImageView, levelController.getLevel().getLevelImage(), levelController.getLevelImages()); //TODO sent argument to get to level conttroller level images
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController);
     }

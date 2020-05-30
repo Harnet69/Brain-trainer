@@ -4,8 +4,6 @@ import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.gridlayout.widget.GridLayout;
@@ -72,12 +70,12 @@ public class TimerController {
                 if (levelController.getLevel().getLevelNum() == 10 && levelPassed) { //TODO HARDCODED WIN LEVEL
                     Game.getInstance().setGame(false);
                     //TODO separate method levelUp
-                    gearController.winGearImageView(); // change image to the next
                     levelController.resetLevel();
                     levelController.resetLevelBounds();
                     levelController.resetLevelIcons();
                     levelController.upMultipl();
                     levelController.changeLevelIcon();
+                    gearController.changeGearImageView(levelController.getLevelImages(), levelController.getLevel().getLevelImage()); // change image to the next
                 }
                 Log.d(TAG, "Level : " + levelController.getLevel().getLevelNum());
             }
