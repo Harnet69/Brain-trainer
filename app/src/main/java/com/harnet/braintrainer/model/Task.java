@@ -22,8 +22,6 @@ public class Task {
         String[] operators = new String[]{"+", "-", "*", "/"};
         String taskString = "";
         Random rand = new Random();
-//        this.num1 = rand.nextInt(10); // TODO here you can implement the difficulty of a game
-//        this.num2 = rand.nextInt(10);
         Log.d(TAG, "generateTask: "+minBound + " : " +maxBound);
         this.num1 = ThreadLocalRandom.current().nextInt(minBound, maxBound + 1);
         this.num2 = ThreadLocalRandom.current().nextInt(minBound, maxBound + 1);

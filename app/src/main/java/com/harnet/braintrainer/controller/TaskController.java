@@ -21,7 +21,7 @@ public class TaskController {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public int showNewTask(int minBound, int maxBound){
-        taskTextView.setText(task.generateTask(minBound, maxBound)); // TODO generate task
+        taskTextView.setText(task.generateTask(minBound, maxBound));
         return task.calculateResult();
     }
 }

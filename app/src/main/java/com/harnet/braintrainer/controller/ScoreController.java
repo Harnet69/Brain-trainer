@@ -42,6 +42,4 @@ public class ScoreController {
     private void updateScoreView(){
         scoreTextView.setText(String.format("%d/%d", rightAnswers, wrongAnswers));
     }
-
-
 }
