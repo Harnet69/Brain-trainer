@@ -70,6 +70,7 @@ public class GameController {
         addClickListenerToBtns();
         scoreController.resetScore();
         gearController.startSpinning(timerController.getTimerDuration());
+        levelController.fillLevelsByIcons();
     }
 
     // add click listeners to buttons

@@ -4,10 +4,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.harnet.braintrainer.R;
 import com.harnet.braintrainer.model.Level;
 
 public class LevelController {
     private static final String TAG = "LevelController";
+    private int[] levelImages = {R.drawable.gear_score_ico, R.drawable.brain_score_ico};
     private Level level;
     private LinearLayout levelView;
     private RulesController gameRulesController;
@@ -15,15 +17,15 @@ public class LevelController {
     public LevelController(LinearLayout levelView, RulesController gameRulesController) {
         this.levelView = levelView;
         this.gameRulesController = gameRulesController;
-        this.level = new Level();
+        this.level = new Level(0);
     }
 
     public Level getLevel() {
         return level;
     }
 
-    public boolean addNextLevel(int rightAnswers, int wrongAnswers){
-        if(gameRulesController.checkGameSessionResult(rightAnswers, wrongAnswers)){
+    public boolean addNextLevel(int rightAnswers, int wrongAnswers) {
+        if (gameRulesController.checkGameSessionResult(rightAnswers, wrongAnswers)) {
             level.up();
             updateLevelIcons();
             return true;
@@ -31,26 +33,37 @@ public class LevelController {
         return false;
     }
 
-    public void resetLevel(){
+    public void resetLevel() {
         level.setLevelNum(0);
     }
 
-    public void upMultipl(){
+    public void upMultipl() {
         level.setMultiplicator(level.getMultiplicator() + 1);
     }
 
-    public void updateLevelIcons(){
-        for(int i=0; i< level.getLevelNum() && i< levelView.getChildCount(); i++){
+    public void updateLevelIcons() {
+        for (int i = 0; i < level.getLevelNum() && i < levelView.getChildCount(); i++) {
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {
+//                ((ImageView) subView).setImageResource(level.getLevelIco()); // TODO there is icon of the level
                 subView.setVisibility(View.VISIBLE);
             }
         }
 
     }
 
-    public void resetLevelIcons(){
-        for(int i=0; i< levelView.getChildCount(); i++){
+    // fill level icons grid by icons
+    public void fillLevelsByIcons() {
+        for (int i = 0; i < levelView.getChildCount(); i++) {
+            final View subView = levelView.getChildAt(i);
+            if (subView instanceof ImageView) {
+                ((ImageView) subView).setImageResource(levelImages[level.getLevelIco()]); // TODO hardcoded image
+            }
+        }
+    }
+
+    public void resetLevelIcons() {
+        for (int i = 0; i < levelView.getChildCount(); i++) {
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {
                 subView.setVisibility(View.INVISIBLE);
@@ -59,8 +72,15 @@ public class LevelController {
 
     }
 
-    public void resetLevelBounds(){
+    public void resetLevelBounds() {
         level.setMinBound(level.getMIN_BOUNDS_DEFAULT());
         level.setMaxBound(level.getMAX_BOUNDS_DEFAULT());
+    }
+
+    public void changeLevelIcon(){
+        if(level.getLevelIco()< levelImages.length){
+            level.setLevelIco(level.getLevelIco()+1);
+        }
+        System.out.println("Level icon" +level.getLevelIco());
     }
 }

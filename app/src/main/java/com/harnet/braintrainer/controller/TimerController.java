@@ -68,6 +68,7 @@ public class TimerController {
                 gearController.cancelPosition();
                 timerView.setTextColor(timerViewTextColor);
                 boolean levelPassed = levelController.addNextLevel(scoreController.getRightAnswers(), scoreController.getWrongAnswers()); // add or not new  level
+                // if win condition
                 if (levelController.getLevel().getLevelNum() == 10 && levelPassed) { //TODO HARDCODED WIN LEVEL
                     Game.getInstance().setGame(false);
                     //TODO separate method levelUp
@@ -76,6 +77,7 @@ public class TimerController {
                     levelController.resetLevelBounds();
                     levelController.resetLevelIcons();
                     levelController.upMultipl();
+                    levelController.changeLevelIcon();
                 }
                 Log.d(TAG, "Level : " + levelController.getLevel().getLevelNum());
             }
