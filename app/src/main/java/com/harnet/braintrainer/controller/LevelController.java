@@ -1,6 +1,5 @@
 package com.harnet.braintrainer.controller;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,8 +10,8 @@ import com.harnet.braintrainer.model.Level;
 
 public class LevelController {
     private static final String TAG = "LevelController";
-    private int[] levelGridImages = {R.drawable.brain_00_ico, R.drawable.brain_01_ico, R.drawable.brain_03_ico, R.drawable.brain_04_ico, R.drawable.brain_05_ico}; // icons for a levels icons grid
-    private int[] levelImages = {R.drawable.brain_00, R.drawable.brain_01, R.drawable.brain_02, R.drawable.brain_03, R.drawable.brain_04, R.drawable.brain_05}; // image for gear spinner
+    private int[] levelGridImages = {R.drawable.brain_00_ico, R.drawable.brain_01_ico, R.drawable.brain_02_ico, R.drawable.brain_03_ico, R.drawable.brain_04_ico, R.drawable.brain_05_ico}; // icons for a levels icons grid
+    private int[] levelImages =      {R.drawable.brain_00,    R.drawable.brain_01,     R.drawable.brain_02,     R.drawable.brain_03,     R.drawable.brain_04,     R.drawable.brain_05}; // image for gear spinner
 
     private Level level;
     private LinearLayout levelView;
@@ -65,7 +64,7 @@ public class LevelController {
         for (int i = 0; i < levelView.getChildCount(); i++) {
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {
-                ((ImageView) subView).setImageResource(levelGridImages[level.getLevelImage()]); // TODO hardcoded image
+                ((ImageView) subView).setImageResource(levelGridImages[level.getLevelImage()]);
             }
         }
     }

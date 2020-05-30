@@ -67,7 +67,7 @@ public class TimerController {
                 timerView.setTextColor(timerViewTextColor);
                 boolean levelPassed = levelController.addNextLevel(scoreController.getRightAnswers(), scoreController.getWrongAnswers()); // add or not new  level
                 // if win condition
-                if (levelController.getLevel().getLevelNum() == 10 && levelPassed) { //TODO HARDCODED WIN LEVEL
+                if (levelController.getLevel().getLevelNum() == 6 && levelPassed) { //TODO HARDCODED WIN LEVEL
                     Game.getInstance().setGame(false);
                     //TODO separate method levelUp
                     levelController.resetLevel();
