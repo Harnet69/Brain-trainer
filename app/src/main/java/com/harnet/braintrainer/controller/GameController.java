@@ -38,7 +38,7 @@ public class GameController {
         answerController = new AnswerController(answerGridLayout);
         rulesController = new RulesController();
         levelController = new LevelController(levelView, rulesController); // level controller
-        gearController = new GearController(gearImageView, levelController.getLevel().getLevelImage(), levelController.getLevelImages()); //TODO sent argument to get to level conttroller level images
+        gearController = new GearController(gearImageView); //TODO sent argument to get to level conttroller level images
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController);
     }

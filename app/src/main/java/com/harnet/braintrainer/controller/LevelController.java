@@ -50,11 +50,9 @@ public class LevelController {
         for (int i = 0; i < level.getLevelNum() && i < levelView.getChildCount(); i++) {
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {
-//                ((ImageView) subView).setImageResource(level.getLevelIco()); // TODO there is icon of the level
                 subView.setVisibility(View.VISIBLE);
             }
         }
-
     }
 
     // fill level icons grid by icons
@@ -74,7 +72,6 @@ public class LevelController {
                 subView.setVisibility(View.INVISIBLE);
             }
         }
-
     }
 
     public void resetLevelBounds() {

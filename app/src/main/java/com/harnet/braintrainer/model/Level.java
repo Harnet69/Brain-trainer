@@ -2,7 +2,7 @@ package com.harnet.braintrainer.model;
 
 public class Level {
     private int levelImage;
-    private int levelNum = 9;
+    private int levelNum = 8;
     private int timerDuration = 20;
     private final int MIN_BOUNDS_DEFAULT = 0;
     private final int MAX_BOUNDS_DEFAULT = 5;
