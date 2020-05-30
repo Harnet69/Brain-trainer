@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private GridLayout answerGridLayout; // TODO find how can we cast it ti Grid Layout
     private ImageView gearImageView;
     private LinearLayout levelView;
+    private TextView levelNumtextView;
 
     private GameController gameController;
 
@@ -36,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
         answerGridLayout = (GridLayout) findViewById(R.id.answerGridLayout);
         gearImageView = findViewById(R.id.gearImageView);
         levelView = findViewById(R.id.levelView);
+        levelNumtextView = findViewById(R.id.levelNumtextView);
 
-        gameController = new GameController(taskTextView, timerTextView, scoreTextView, answerGridLayout, gearImageView, levelView);
+        gameController = new GameController(taskTextView, timerTextView, scoreTextView, answerGridLayout, gearImageView, levelView, levelNumtextView);
 
         gameController.startGame();
     }

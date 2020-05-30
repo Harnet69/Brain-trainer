@@ -20,25 +20,29 @@ public class GameController {
     private GridLayout answerGridLayout;
     private ImageView gearImageView;
     private LinearLayout levelView;
+    private TextView levelNumtextView;
+
     private TimerController timerController;
     private TaskController taskController;
     private ScoreController scoreController;
     private AnswerController answerController;
     private RulesController rulesController;
-    private GearController gearController; // TODO add method for changing gearImage
+    private GearController gearController;
     private LevelController levelController;
     private int rightResult;
 
-    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView) {
+    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView, TextView levelNumtextView) {
         this.taskTextView = taskTextView;
         this.answerGridLayout = answerGridLayout;
         this.gearImageView = gearImageView;
         this.levelView = levelView;
+        this.levelNumtextView = levelNumtextView;
+
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
         rulesController = new RulesController();
-        levelController = new LevelController(levelView, rulesController); // level controller
-        gearController = new GearController(gearImageView); //TODO sent argument to get to level conttroller level images
+        levelController = new LevelController(levelView, rulesController, levelNumtextView); // level controller
+        gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController);
     }

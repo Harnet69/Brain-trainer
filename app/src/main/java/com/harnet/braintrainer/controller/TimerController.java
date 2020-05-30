@@ -75,6 +75,7 @@ public class TimerController {
                     levelController.resetLevelIcons();
                     levelController.upMultipl();
                     levelController.changeLevelIcon();
+                    levelController.upGeneralLevel(); // TODO doesn't work?
                     gearController.changeGearImageView(levelController.getLevelImages(), levelController.getLevel().getLevelImage()); // change image to the next
                 }
                 Log.d(TAG, "Level : " + levelController.getLevel().getLevelNum());

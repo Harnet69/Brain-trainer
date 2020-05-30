@@ -1,26 +1,28 @@
 package com.harnet.braintrainer.controller;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.harnet.braintrainer.R;
 import com.harnet.braintrainer.model.Level;
 
 public class LevelController {
     private static final String TAG = "LevelController";
-//    private int[] levelGridImages = {R.drawable.gear_score_ico, R.drawable.brain_score_ico}; // icons for a levels icons grid
-//    private int[] levelImages = {R.drawable.gear, R.drawable.brain}; // image for gear spinner
     private int[] levelGridImages = {R.drawable.brain_00_ico, R.drawable.brain_01_ico, R.drawable.brain_03_ico, R.drawable.brain_04_ico, R.drawable.brain_05_ico}; // icons for a levels icons grid
     private int[] levelImages = {R.drawable.brain_00, R.drawable.brain_01, R.drawable.brain_02, R.drawable.brain_03, R.drawable.brain_04, R.drawable.brain_05}; // image for gear spinner
 
     private Level level;
     private LinearLayout levelView;
     private RulesController gameRulesController;
+    private TextView levelNumtextView;
 
-    public LevelController(LinearLayout levelView, RulesController gameRulesController) {
+    public LevelController(LinearLayout levelView, RulesController gameRulesController, TextView levelNumtextView) {
         this.levelView = levelView;
         this.gameRulesController = gameRulesController;
+        this.levelNumtextView = levelNumtextView;
         this.level = new Level(0);
     }
 
@@ -86,6 +88,23 @@ public class LevelController {
         if(level.getLevelImage()< levelGridImages.length){
             level.setLevelImage(level.getLevelImage()+1);
         }
-        System.out.println("Level icon" +level.getLevelImage());
+    }
+
+    public String getGeneralLevel(){
+        return String.valueOf(level.getGeneralLevelNum());
+    }
+
+    public void setGeneralLevel(){
+        levelNumtextView.setText(String.valueOf(level.getGeneralLevelNum()));
+    }
+
+    public void upGeneralLevel(){
+        level.setGeneralLevelNum(level.getGeneralLevelNum() + 1);
+        setGeneralLevel();
+    }
+
+    public void resetGeneralLevel(){
+        level.setGeneralLevelNum(0);
+        setGeneralLevel();
     }
 }

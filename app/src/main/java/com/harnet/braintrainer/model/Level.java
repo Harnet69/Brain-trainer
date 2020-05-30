@@ -2,7 +2,8 @@ package com.harnet.braintrainer.model;
 
 public class Level {
     private int levelImage;
-    private int levelNum = 8;
+    private int levelNum = 0;
+    private int generalLevelNum = 0;
     private int timerDuration = 20;
     private final int MIN_BOUNDS_DEFAULT = 0;
     private final int MAX_BOUNDS_DEFAULT = 5;
@@ -16,6 +17,14 @@ public class Level {
 
     public int getLevelNum() {
         return levelNum;
+    }
+
+    public int getGeneralLevelNum() {
+        return generalLevelNum;
+    }
+
+    public void setGeneralLevelNum(int generalLevelNum) {
+        this.generalLevelNum = generalLevelNum;
     }
 
     public int getLevelImage() {
