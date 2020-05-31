@@ -1,9 +1,6 @@
 package com.harnet.braintrainer.view;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,15 +48,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        gameController.onPause();
-        // TODO implement timer pause
+        gameController.getStateController().onPause();
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        gameController.onResume();
-        // TODO implement timer start
-
+        gameController.getStateController().onResume();
     }
 }

@@ -33,6 +33,7 @@ public class GameController {
     private GearController gearController;
     private LevelController levelController;
     private SoundBackgroundController soundBackgroundController;
+    private StateController stateController;
     private int rightResult;
 
     public GameController(Context mContext, TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView, TextView levelNumtextView) {
@@ -50,6 +51,11 @@ public class GameController {
         taskController = new TaskController(taskTextView, levelController.getLevel());
         soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController);
+        stateController = new StateController(soundBackgroundController); // manage app states
+    }
+
+    public StateController getStateController() {
+        return stateController;
     }
 
     public void startGame() {
@@ -106,13 +112,5 @@ public class GameController {
         scoreController.addScore(isAnswerRight);// add a score
         rightResult = taskController.showNewTask(levelController.getLevel().getMinBound(), levelController.getLevel().getMaxBound());// create a new task //TODO hardcode
         answerController.generateAnswers(rightResult);// generate new answers
-    }
-
-    public void onPause(){
-        soundBackgroundController.onPause();
-    }
-
-    public void onResume(){
-        soundBackgroundController.onStart();
     }
 }
