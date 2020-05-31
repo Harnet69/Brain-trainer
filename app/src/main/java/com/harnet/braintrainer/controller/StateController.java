@@ -6,21 +6,27 @@ import android.os.IBinder;
 
 import androidx.annotation.Nullable;
 
+import com.harnet.braintrainer.model.Game;
+
 public class StateController extends Service {
     private SoundBackgroundController soundBackgroundController;
+    private TimerController timerController;
 
-    public StateController(SoundBackgroundController soundBackgroundController) {
+    public StateController(SoundBackgroundController soundBackgroundController, TimerController timerController) {
         this.soundBackgroundController = soundBackgroundController;
+        this.timerController = timerController;
     }
 
     public void onPause(){
         soundBackgroundController.onPause();
-        // TODO implement timer pause
+        timerController.pauseTimer();
     }
 
     public void onResume(){
-        soundBackgroundController.onStart();
-        // TODO implement timer start
+        if (Game.getInstance().isGame()) {
+            soundBackgroundController.onStart();
+            timerController.startTimer();
+        }
     }
 
     @Nullable

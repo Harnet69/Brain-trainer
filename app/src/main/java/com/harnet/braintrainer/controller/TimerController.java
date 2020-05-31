@@ -17,8 +17,10 @@ public class TimerController {
 
     private static final String TAG = "timerController";
     private Timer timer;
+    CountDownTimer gameTimer;
     private SoundBackgroundController soundBackgroundController;
     private TextView timerView;
+    private TextView taskTextView;
     private GridLayout answerGridLayout;
     private GearController gearController;
     private int restTime; // time for doing assignment
@@ -26,11 +28,13 @@ public class TimerController {
     private int timerViewTextColor;
     private LevelController levelController; // control level of game
     private ScoreController scoreController;
-    private boolean winCondition;
 
-    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController, LevelController levelController, ScoreController scoreController, SoundBackgroundController soundBackgroundController) {
+    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController,
+                           LevelController levelController, ScoreController scoreController,
+                           SoundBackgroundController soundBackgroundController, TextView taskTextView) {
         this.timer = timer;
         this.timerView = timerView;
+        this.taskTextView = taskTextView;
         this.answerGridLayout = answerGridLayout;
         this.restTime = timer.getDuration();
         this.gearController = gearController;
@@ -46,9 +50,9 @@ public class TimerController {
     }
 
     // start timer
-    public void startTimer(final TextView taskTextView, final ScoreController scoreController) {
+    public void startTimer() {
         soundBackgroundController.onStart();
-        new CountDownTimer(restTime * 1000, countDownInterval) {
+        gameTimer = new CountDownTimer(restTime * 1000, countDownInterval) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onTick(long millisUntilFinished) {
@@ -66,28 +70,19 @@ public class TimerController {
             @Override
             public void onFinish() {
                 answerGridLayout.setVisibility(View.INVISIBLE);
-                Log.i(TAG, "onFinish: time is up");
                 taskTextView.setText("");
                 resetTimer();// reset timer
                 Game.getInstance().setGame(false);
                 gearController.cancelPosition();
                 timerView.setTextColor(timerViewTextColor);
                 boolean levelPassed = levelController.addNextLevel(scoreController.getRightAnswers(), scoreController.getWrongAnswers()); // add or not new  level
-                // if win condition
+                // win condition
                 if (levelController.getLevel().getLevelNum() == 6 && levelPassed) { //TODO HARDCODED WIN LEVEL
                     Game.getInstance().setGame(false);
-                    //TODO separate method levelUp
-                    levelController.resetLevel();
-                    levelController.resetLevelBounds();
-                    levelController.resetLevelIcons();
-                    levelController.upMultipl();
-                    levelController.changeLevelIcon();
-                    levelController.upGeneralLevel(); // TODO doesn't work?
+                    levelController.generalLevelUp();
                     gearController.changeGearImageView(levelController.getLevelImages(), levelController.getLevel().getLevelImage()); // change image to the next
                 }
                 soundBackgroundController.onDestroy();
-                soundBackgroundController.resetSpeed();
-                Log.d(TAG, "Level : " + levelController.getLevel().getLevelNum());
             }
         }.start();
     }
@@ -96,5 +91,11 @@ public class TimerController {
     public void resetTimer() {
         restTime = timer.getDuration();
         timerView.setText(String.valueOf(restTime));
+    }
+
+    public void pauseTimer(){
+        gameTimer.cancel();
+//        gameTimer.pause();
+        // TODO implement saving rests time, invoke timer.cancel() for inPause state and timer.start() for inResume()
     }
 }

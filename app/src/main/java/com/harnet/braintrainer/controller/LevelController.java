@@ -89,10 +89,6 @@ public class LevelController {
         }
     }
 
-    public String getGeneralLevel(){
-        return String.valueOf(level.getGeneralLevelNum());
-    }
-
     public void setGeneralLevel(){
         levelNumtextView.setText(String.valueOf(level.getGeneralLevelNum()));
     }
@@ -102,8 +98,13 @@ public class LevelController {
         setGeneralLevel();
     }
 
-    public void resetGeneralLevel(){
-        level.setGeneralLevelNum(0);
-        setGeneralLevel();
+    // method to do general level up
+    public void generalLevelUp(){
+        resetLevel();
+        resetLevelBounds();
+        resetLevelIcons();
+        upMultipl();
+        changeLevelIcon();
+        upGeneralLevel();
     }
 }

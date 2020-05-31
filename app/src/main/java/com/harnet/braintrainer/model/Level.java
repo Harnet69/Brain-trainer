@@ -2,14 +2,14 @@ package com.harnet.braintrainer.model;
 
 public class Level {
     private int levelImage;
-    private int levelNum = 0;
+    private int levelNum = 5;
     private int generalLevelNum = 0;
     private int timerDuration = 20;
     private final int MIN_BOUNDS_DEFAULT = 0;
     private final int MAX_BOUNDS_DEFAULT = 5;
     private int minBound = 0;
     private int maxBound = 5;
-    private int multiplicator = 2;
+    private int multiplicator = 2; // TODO implement the difficulty by changing the multiplicator
 
     public Level(int levelIco) {
         this.levelImage = levelIco;

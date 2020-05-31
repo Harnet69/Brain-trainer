@@ -50,8 +50,8 @@ public class GameController {
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
         soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
-        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController);
-        stateController = new StateController(soundBackgroundController); // manage app states
+        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController, taskTextView);
+        stateController = new StateController(soundBackgroundController, timerController); // manage app states
     }
 
     public StateController getStateController() {
@@ -79,7 +79,7 @@ public class GameController {
     // new game start
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void startNewGame(){
-        timerController.startTimer(taskTextView, scoreController);// start the countDown timer
+        timerController.startTimer();// start the countDown timer
         answerGridLayout.setVisibility(View.VISIBLE);
         rightResult = taskController.showNewTask(levelController.getLevel().getMinBound(), levelController.getLevel().getMaxBound());// create a new task and return the result
         answerController.generateAnswers(rightResult);

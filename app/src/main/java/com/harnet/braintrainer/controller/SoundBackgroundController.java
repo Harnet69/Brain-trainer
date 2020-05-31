@@ -32,10 +32,13 @@ public class SoundBackgroundController extends Service {
     }
     public void onDestroy() {
         mp.stop();
+        resetSpeed();
     }
     public void onPause()
     {
-        mp.pause();
+        if(mp != null) {
+            mp.pause();
+        }
     }
     public void onStart(){
         if(mp != null){
