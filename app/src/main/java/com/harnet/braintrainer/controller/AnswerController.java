@@ -29,6 +29,7 @@ public class AnswerController {
             if (subView instanceof TextView) {
                 ((TextView) subView).setText(String.valueOf(answers[i]));
                 subView.setTag(String.valueOf(answers[i]));
+                subView.setSoundEffectsEnabled(false); // TODO disabled default click sound
             }
         }
     }

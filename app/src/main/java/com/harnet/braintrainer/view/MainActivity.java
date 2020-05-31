@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         levelView = findViewById(R.id.levelView);
         levelNumtextView = findViewById(R.id.levelNumtextView);
 
-        gameController = new GameController(taskTextView, timerTextView, scoreTextView, answerGridLayout, gearImageView, levelView, levelNumtextView);
+        gameController = new GameController(getApplicationContext(), taskTextView, timerTextView, scoreTextView, answerGridLayout, gearImageView, levelView, levelNumtextView);
 
         gameController.startGame();
     }

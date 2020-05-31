@@ -1,5 +1,6 @@
 package com.harnet.braintrainer.controller;
 
+import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class GameController {
     private LinearLayout levelView;
     private TextView levelNumtextView;
 
+    private Context mContext;
     private TimerController timerController;
     private TaskController taskController;
     private ScoreController scoreController;
@@ -30,9 +32,10 @@ public class GameController {
     private RulesController rulesController;
     private GearController gearController;
     private LevelController levelController;
+    private SoundBackgroundController soundBackgroundController;
     private int rightResult;
 
-    public GameController(TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView, TextView levelNumtextView) {
+    public GameController(Context mContext, TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView, TextView levelNumtextView) {
         this.taskTextView = taskTextView;
         this.answerGridLayout = answerGridLayout;
         this.gearImageView = gearImageView;
@@ -46,6 +49,7 @@ public class GameController {
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController);
+        soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
     }
 
     public void startGame() {
@@ -76,6 +80,7 @@ public class GameController {
         scoreController.resetScore();
         gearController.startSpinning(timerController.getTimerDuration());
         levelController.fillLevelsByIcons();
+        soundBackgroundController.onCreate();
     }
 
     // add click listeners to buttons
