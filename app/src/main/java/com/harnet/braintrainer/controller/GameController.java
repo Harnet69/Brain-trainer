@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.harnet.braintrainer.model.Game;
+import com.harnet.braintrainer.model.Sounds;
 import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
