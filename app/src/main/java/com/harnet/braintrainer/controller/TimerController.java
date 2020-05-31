@@ -15,6 +15,7 @@ public class TimerController {
 
     private static final String TAG = "timerController";
     private Timer timer;
+    private SoundBackgroundController soundBackgroundController;
     private TextView timerView;
     private GridLayout answerGridLayout;
     private GearController gearController;
@@ -25,7 +26,7 @@ public class TimerController {
     private ScoreController scoreController;
     private boolean winCondition;
 
-    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController, LevelController levelController, ScoreController scoreController) {
+    public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController, LevelController levelController, ScoreController scoreController, SoundBackgroundController soundBackgroundController) {
         this.timer = timer;
         this.timerView = timerView;
         this.answerGridLayout = answerGridLayout;
@@ -35,6 +36,7 @@ public class TimerController {
         timerView.setText(String.valueOf(restTime));
         this.timerViewTextColor = timerView.getCurrentTextColor();
         this.scoreController = scoreController;
+        this.soundBackgroundController = soundBackgroundController;
     }
 
     public int getTimerDuration() {
@@ -43,6 +45,7 @@ public class TimerController {
 
     // start timer
     public void startTimer(final TextView taskTextView, final ScoreController scoreController) {
+        soundBackgroundController.onStart();
         new CountDownTimer(restTime * 1000, countDownInterval) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -78,6 +81,7 @@ public class TimerController {
                     levelController.upGeneralLevel(); // TODO doesn't work?
                     gearController.changeGearImageView(levelController.getLevelImages(), levelController.getLevel().getLevelImage()); // change image to the next
                 }
+                soundBackgroundController.onDestroy();
                 Log.d(TAG, "Level : " + levelController.getLevel().getLevelNum());
             }
         }.start();

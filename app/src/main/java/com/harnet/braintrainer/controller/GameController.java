@@ -48,8 +48,8 @@ public class GameController {
         levelController = new LevelController(levelView, rulesController, levelNumtextView); // level controller
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
-        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController);
         soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
+        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController);
     }
 
     public void startGame() {
@@ -59,6 +59,7 @@ public class GameController {
             @Override
             public void onClick(View v) {
                 if(!Game.getInstance().isGame()){
+                    soundBackgroundController.onCreate(); // TODO move it to method which triggered once when game started
                     startNewGame();
                     Game.getInstance().setGame(true);
                 }else{
@@ -80,7 +81,7 @@ public class GameController {
         scoreController.resetScore();
         gearController.startSpinning(timerController.getTimerDuration());
         levelController.fillLevelsByIcons();
-        soundBackgroundController.onCreate();
+//        soundBackgroundController.onStart();
     }
 
     // add click listeners to buttons

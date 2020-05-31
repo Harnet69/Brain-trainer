@@ -29,13 +29,14 @@ public class SoundBackgroundController extends Service {
     {
         mp = MediaPlayer.create(mContext, backgroundSound);
         mp.setLooping(true);
-        mp.start();
+//        mp.start();
     }
     public void onDestroy()
     {
+
         mp.stop();
     }
-    public void onStart(Intent intent,int startid){
+    public void onStart(){
 
         Log.d(TAG, "On start");
         mp.start();
