@@ -4,15 +4,15 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
-import com.harnet.braintrainer.R;
+import androidx.annotation.RequiresApi;
 
 public class SoundBackgroundController extends Service {
-    private static final String TAG = "SoundBackgroundControll";
     private int backgroundSound;
     private Context mContext;
+    private float speed = 1.00f;
 
     public SoundBackgroundController(int backgroundSound, Context mContext) {
         this.backgroundSound = backgroundSound;
@@ -29,16 +29,22 @@ public class SoundBackgroundController extends Service {
     {
         mp = MediaPlayer.create(mContext, backgroundSound);
         mp.setLooping(true);
-//        mp.start();
     }
     public void onDestroy()
     {
-
         mp.stop();
     }
     public void onStart(){
-
-        Log.d(TAG, "On start");
         mp.start();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void speedUp(){
+        speed += 0.2;
+        mp.setPlaybackParams(mp.getPlaybackParams().setSpeed(speed));
+    }
+
+    public void resetSpeed(){
+        speed = 1;
     }
 }

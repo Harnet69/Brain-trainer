@@ -81,7 +81,6 @@ public class GameController {
         scoreController.resetScore();
         gearController.startSpinning(timerController.getTimerDuration());
         levelController.fillLevelsByIcons();
-//        soundBackgroundController.onStart();
     }
 
     // add click listeners to buttons

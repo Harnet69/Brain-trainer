@@ -1,11 +1,13 @@
 package com.harnet.braintrainer.controller;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.harnet.braintrainer.model.Game;
@@ -47,12 +49,14 @@ public class TimerController {
     public void startTimer(final TextView taskTextView, final ScoreController scoreController) {
         soundBackgroundController.onStart();
         new CountDownTimer(restTime * 1000, countDownInterval) {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onTick(long millisUntilFinished) {
                 restTime -= countDownInterval / 1000;
                 timerView.setText(String.valueOf(restTime));
                 if (restTime <= 5) {
                     timerView.setTextColor(Color.parseColor("#fc0313"));
+                    soundBackgroundController.speedUp();
                 }
                 if (restTime < 1) {
                     answerGridLayout.setVisibility(View.INVISIBLE); // prevent input after game finish
@@ -82,6 +86,7 @@ public class TimerController {
                     gearController.changeGearImageView(levelController.getLevelImages(), levelController.getLevel().getLevelImage()); // change image to the next
                 }
                 soundBackgroundController.onDestroy();
+                soundBackgroundController.resetSpeed();
                 Log.d(TAG, "Level : " + levelController.getLevel().getLevelNum());
             }
         }.start();
