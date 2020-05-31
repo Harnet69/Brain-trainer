@@ -107,4 +107,12 @@ public class GameController {
         rightResult = taskController.showNewTask(levelController.getLevel().getMinBound(), levelController.getLevel().getMaxBound());// create a new task //TODO hardcode
         answerController.generateAnswers(rightResult);// generate new answers
     }
+
+    public void onPause(){
+        soundBackgroundController.onPause();
+    }
+
+    public void onResume(){
+        soundBackgroundController.onStart();
+    }
 }

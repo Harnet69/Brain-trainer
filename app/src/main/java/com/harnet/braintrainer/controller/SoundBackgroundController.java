@@ -30,18 +30,25 @@ public class SoundBackgroundController extends Service {
         mp = MediaPlayer.create(mContext, backgroundSound);
         mp.setLooping(true);
     }
-    public void onDestroy()
-    {
+    public void onDestroy() {
         mp.stop();
     }
+    public void onPause()
+    {
+        mp.pause();
+    }
     public void onStart(){
-        mp.start();
+        if(mp != null){
+            mp.start();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void speedUp(){
         speed += 0.2;
-        mp.setPlaybackParams(mp.getPlaybackParams().setSpeed(speed));
+        if(mp.isPlaying()){
+            mp.setPlaybackParams(mp.getPlaybackParams().setSpeed(speed));
+        }
     }
 
     public void resetSpeed(){

@@ -1,6 +1,8 @@
 package com.harnet.braintrainer.view;
 
+import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,11 +16,12 @@ import com.harnet.braintrainer.R;
 import com.harnet.braintrainer.controller.GameController;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     private Button goBtn;
     private TextView timerTextView;
     private TextView taskTextView;
     private TextView scoreTextView;
-    private GridLayout answerGridLayout; // TODO find how can we cast it ti Grid Layout
+    private GridLayout answerGridLayout;
     private ImageView gearImageView;
     private LinearLayout levelView;
     private TextView levelNumtextView;
@@ -39,8 +42,24 @@ public class MainActivity extends AppCompatActivity {
         levelView = findViewById(R.id.levelView);
         levelNumtextView = findViewById(R.id.levelNumtextView);
 
-        gameController = new GameController(getApplicationContext(), taskTextView, timerTextView, scoreTextView, answerGridLayout, gearImageView, levelView, levelNumtextView);
+        gameController = new GameController(getApplicationContext(), taskTextView, timerTextView, scoreTextView,
+                                                                    answerGridLayout, gearImageView, levelView, levelNumtextView);
 
         gameController.startGame();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameController.onPause();
+        // TODO implement timer pause
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        gameController.onResume();
+        // TODO implement timer start
+
     }
 }
