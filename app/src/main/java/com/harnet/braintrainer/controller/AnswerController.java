@@ -1,5 +1,6 @@
 package com.harnet.braintrainer.controller;
 
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class AnswerController {
     private static final String TAG = "AnswerController";
-    GridLayout answerGridLayout;
+    private GridLayout answerGridLayout;
 
     public AnswerController(GridLayout answerGridLayout) {
         this.answerGridLayout = answerGridLayout;

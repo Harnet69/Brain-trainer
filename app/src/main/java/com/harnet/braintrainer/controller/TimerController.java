@@ -3,7 +3,6 @@ package com.harnet.braintrainer.controller;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,7 +17,7 @@ public class TimerController {
     private static final String TAG = "timerController";
     private Timer timer;
     CountDownTimer gameTimer;
-    private SoundBackgroundController soundBackgroundController;
+    private SoundController soundController;
     private TextView timerView;
     private TextView taskTextView;
     private GridLayout answerGridLayout;
@@ -31,7 +30,7 @@ public class TimerController {
 
     public TimerController(Timer timer, TextView timerView, GridLayout answerGridLayout, GearController gearController,
                            LevelController levelController, ScoreController scoreController,
-                           SoundBackgroundController soundBackgroundController, TextView taskTextView) {
+                           SoundController soundController, TextView taskTextView) {
         this.timer = timer;
         this.timerView = timerView;
         this.taskTextView = taskTextView;
@@ -42,7 +41,7 @@ public class TimerController {
         timerView.setText(String.valueOf(restTime));
         this.timerViewTextColor = timerView.getCurrentTextColor();
         this.scoreController = scoreController;
-        this.soundBackgroundController = soundBackgroundController;
+        this.soundController = soundController;
     }
 
     public int getTimerDuration() {
@@ -51,7 +50,7 @@ public class TimerController {
 
     // start timer
     public void startTimer() {
-        soundBackgroundController.onStart();
+        soundController.onStart();
         gameTimer = new CountDownTimer(restTime * 1000, countDownInterval) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -60,7 +59,7 @@ public class TimerController {
                 timerView.setText(String.valueOf(restTime));
                 if (restTime <= 5) {
                     timerView.setTextColor(Color.parseColor("#fc0313"));
-                    soundBackgroundController.speedUp();
+                    soundController.speedUp();
                 }
                 if (restTime < 1) {
                     answerGridLayout.setVisibility(View.INVISIBLE); // prevent input after game finish
@@ -82,7 +81,7 @@ public class TimerController {
                     levelController.generalLevelUp();
                     gearController.changeGearImageView(levelController.getLevelImages(), levelController.getLevel().getLevelImage()); // change image to the next
                 }
-                soundBackgroundController.onDestroy();
+                soundController.onDestroy();
             }
         }.start();
     }

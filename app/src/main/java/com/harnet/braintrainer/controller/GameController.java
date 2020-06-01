@@ -14,7 +14,6 @@ import androidx.annotation.RequiresApi;
 import androidx.gridlayout.widget.GridLayout;
 
 import com.harnet.braintrainer.model.Game;
-import com.harnet.braintrainer.model.Sounds;
 import com.harnet.braintrainer.model.Timer;
 
 public class GameController {
@@ -36,7 +35,7 @@ public class GameController {
     private RulesController rulesController;
     private GearController gearController;
     private LevelController levelController;
-    private SoundBackgroundController soundBackgroundController;
+    private SoundController soundController;
     private StateController stateController;
     private VolumeController volumeController;
     // TODO implement Volume controller
@@ -54,15 +53,15 @@ public class GameController {
         this.volumeControlView = volumeControlView;
 
         scoreController = new ScoreController(scoreTextView);
+        soundController = new SoundController(mContext);
         answerController = new AnswerController(answerGridLayout);
-        rulesController = new RulesController();
+        rulesController = new RulesController( soundController.getRightAnswer(), soundController.getWrongAnswer(), soundController.getNextLevel());
         levelController = new LevelController(levelView, rulesController, levelNumtextView); // level controller
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
-        soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
-        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController, taskTextView);
-        stateController = new StateController(soundBackgroundController, timerController); // manage app states
-        volumeController = new VolumeController(mContext, volumeControlView, soundBackgroundController.getBgrSoundMediaPlayer(), muteBtn); // TODO
+        timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundController, taskTextView);
+        stateController = new StateController(soundController, timerController); // manage app states
+        volumeController = new VolumeController(mContext, volumeControlView, soundController.getBgrSoundMediaPlayer(), muteBtn); // TODO
     }
 
     public StateController getStateController() {
@@ -76,7 +75,7 @@ public class GameController {
             @Override
             public void onClick(View v) {
                 if(!Game.getInstance().isGame()){
-                    soundBackgroundController.onCreate(); // TODO move it to method which triggered once when game started
+                    soundController.onCreate();
                     startNewGame();
                     Game.getInstance().setGame(true);
                 }else{

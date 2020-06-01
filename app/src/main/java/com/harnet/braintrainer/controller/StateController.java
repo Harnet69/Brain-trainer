@@ -9,22 +9,22 @@ import androidx.annotation.Nullable;
 import com.harnet.braintrainer.model.Game;
 
 public class StateController extends Service {
-    private SoundBackgroundController soundBackgroundController;
+    private SoundController soundController;
     private TimerController timerController;
 
-    public StateController(SoundBackgroundController soundBackgroundController, TimerController timerController) {
-        this.soundBackgroundController = soundBackgroundController;
+    public StateController(SoundController soundController, TimerController timerController) {
+        this.soundController = soundController;
         this.timerController = timerController;
     }
 
     public void onPause(){
-        soundBackgroundController.onPause();
+        soundController.onPause();
         timerController.pauseTimer();
     }
 
     public void onResume(){
         if (Game.getInstance().isGame()) {
-            soundBackgroundController.onStart();
+            soundController.onStart();
             timerController.startTimer();
         }
     }
