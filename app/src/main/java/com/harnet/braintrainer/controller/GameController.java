@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -23,6 +25,8 @@ public class GameController {
     private ImageView gearImageView;
     private LinearLayout levelView;
     private TextView levelNumtextView;
+    private Button muteBtn;
+    private SeekBar volumeControl;
 
     private Context mContext;
     private TimerController timerController;
@@ -38,12 +42,16 @@ public class GameController {
     // TODO implement Volume controller
     private int rightResult;
 
-    public GameController(Context mContext, TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView, TextView levelNumtextView) {
+    public GameController(Context mContext, TextView taskTextView, TextView timerTextView, TextView scoreTextView,
+                          GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView,
+                          TextView levelNumtextView, Button muteBtn, SeekBar volumeControl) {
         this.taskTextView = taskTextView;
         this.answerGridLayout = answerGridLayout;
         this.gearImageView = gearImageView;
         this.levelView = levelView;
         this.levelNumtextView = levelNumtextView;
+        this.muteBtn = muteBtn;
+        this.volumeControl = volumeControl;
 
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
@@ -54,7 +62,7 @@ public class GameController {
         soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController, taskTextView);
         stateController = new StateController(soundBackgroundController, timerController); // manage app states
-//        volumeController = new VolumeController(mContext); // TODO
+        volumeController = new VolumeController(mContext, volumeControl, muteBtn); // TODO
     }
 
     public StateController getStateController() {
