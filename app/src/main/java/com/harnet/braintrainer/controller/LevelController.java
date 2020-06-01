@@ -1,5 +1,6 @@
 package com.harnet.braintrainer.controller;
 
+import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,11 +18,13 @@ public class LevelController {
     private LinearLayout levelView;
     private RulesController gameRulesController;
     private TextView levelNumtextView;
+    private MediaPlayer nextGeneralLevelSound;
 
-    public LevelController(LinearLayout levelView, RulesController gameRulesController, TextView levelNumtextView) {
+    public LevelController(LinearLayout levelView, RulesController gameRulesController, TextView levelNumtextView, MediaPlayer nextGeneralLevelSound) {
         this.levelView = levelView;
         this.gameRulesController = gameRulesController;
         this.levelNumtextView = levelNumtextView;
+        this.nextGeneralLevelSound = nextGeneralLevelSound;
         this.level = new Level(0);
     }
 
@@ -106,5 +109,6 @@ public class LevelController {
         upMultipl();
         changeLevelIcon();
         upGeneralLevel();
+        nextGeneralLevelSound.start();
     }
 }

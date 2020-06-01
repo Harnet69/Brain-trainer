@@ -56,7 +56,7 @@ public class GameController {
         soundController = new SoundController(mContext);
         answerController = new AnswerController(answerGridLayout);
         rulesController = new RulesController( soundController.getRightAnswer(), soundController.getWrongAnswer(), soundController.getNextLevel());
-        levelController = new LevelController(levelView, rulesController, levelNumtextView); // level controller
+        levelController = new LevelController(levelView, rulesController, levelNumtextView, soundController.getNextGeneralLevel()); // level controller
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundController, taskTextView);
