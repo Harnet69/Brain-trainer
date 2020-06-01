@@ -54,9 +54,9 @@
 
     <TextView
         android:id="@+id/levelNumtextView"
-        android:alpha="0.1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:alpha="0.1"
         android:gravity="center"
         android:text="0"
         android:textSize="400sp"
@@ -151,6 +151,37 @@
     </androidx.gridlayout.widget.GridLayout>
 
     <LinearLayout
+        android:id="@+id/VolumeControlBlock"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="45dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/muteBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@drawable/unmute_btn" />
+
+        <SeekBar
+            android:id="@+id/volumeControl"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            tools:layout_conversion_absoluteHeight="50dp"
+            tools:layout_conversion_absoluteWidth="250dp"
+            tools:layout_editor_absoluteX="70dp"
+            tools:layout_editor_absoluteY="66dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/levelView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -173,7 +204,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -185,36 +216,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:visibility="invisible" />-->
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:visibility="invisible" />-->
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:visibility="invisible"/>-->
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:visibility="invisible"/>-->
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:visibility="invisible"/>-->
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:visibility="invisible"/>-->
 
-<!--        <ImageView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:visibility="invisible" />-->
+        <!--        <ImageView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_weight="1"-->
+        <!--            android:visibility="invisible" />-->
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

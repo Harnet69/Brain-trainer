@@ -34,6 +34,8 @@ public class GameController {
     private LevelController levelController;
     private SoundBackgroundController soundBackgroundController;
     private StateController stateController;
+    private VolumeController volumeController;
+    // TODO implement Volume controller
     private int rightResult;
 
     public GameController(Context mContext, TextView taskTextView, TextView timerTextView, TextView scoreTextView, GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView, TextView levelNumtextView) {
@@ -52,6 +54,7 @@ public class GameController {
         soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController, taskTextView);
         stateController = new StateController(soundBackgroundController, timerController); // manage app states
+//        volumeController = new VolumeController(mContext); // TODO
     }
 
     public StateController getStateController() {
