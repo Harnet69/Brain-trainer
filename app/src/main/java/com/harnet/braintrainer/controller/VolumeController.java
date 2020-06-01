@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.SeekBar;
 
 import com.harnet.braintrainer.R;
-import com.harnet.braintrainer.model.Sounds;
 
 public class VolumeController {
     private static final String TAG = "VolumeController";
@@ -22,8 +21,8 @@ public class VolumeController {
     private Button muteBtnView;
     private boolean isSoundMute;
 
-    public VolumeController(Context mContext, SeekBar volumeControl, Button muteBtnView) {
-        mediaPlayer = MediaPlayer.create(mContext, Sounds.BACKGROUND_MUSIC.getSound()); // TODO hardcoded sound source
+    public VolumeController(Context mContext, SeekBar volumeControl, MediaPlayer bgrSoundMediaPlayer, Button muteBtnView) {
+        mediaPlayer = bgrSoundMediaPlayer;
         audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
         this.volumeControl = volumeControl;
@@ -33,10 +32,7 @@ public class VolumeController {
         this.muteBtnView = muteBtnView;
         
         clickAction(); // TODO is it the right place for it?
-    }
-
-    public int getCurrentVolume() {
-        return currentVolume;
+        manageVolumeControl();
     }
 
     public boolean isSoundMute() {
@@ -96,6 +92,5 @@ public class VolumeController {
                 }
             }
         });
-
     }
 }

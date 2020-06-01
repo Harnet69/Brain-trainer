@@ -26,7 +26,7 @@ public class GameController {
     private LinearLayout levelView;
     private TextView levelNumtextView;
     private Button muteBtn;
-    private SeekBar volumeControl;
+    private SeekBar volumeControlView;
 
     private Context mContext;
     private TimerController timerController;
@@ -44,14 +44,14 @@ public class GameController {
 
     public GameController(Context mContext, TextView taskTextView, TextView timerTextView, TextView scoreTextView,
                           GridLayout answerGridLayout, ImageView gearImageView, LinearLayout levelView,
-                          TextView levelNumtextView, Button muteBtn, SeekBar volumeControl) {
+                          TextView levelNumtextView, Button muteBtn, SeekBar volumeControlView) {
         this.taskTextView = taskTextView;
         this.answerGridLayout = answerGridLayout;
         this.gearImageView = gearImageView;
         this.levelView = levelView;
         this.levelNumtextView = levelNumtextView;
         this.muteBtn = muteBtn;
-        this.volumeControl = volumeControl;
+        this.volumeControlView = volumeControlView;
 
         scoreController = new ScoreController(scoreTextView);
         answerController = new AnswerController(answerGridLayout);
@@ -62,7 +62,7 @@ public class GameController {
         soundBackgroundController = new SoundBackgroundController(Sounds.BACKGROUND_MUSIC.getSound(), mContext);
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundBackgroundController, taskTextView);
         stateController = new StateController(soundBackgroundController, timerController); // manage app states
-        volumeController = new VolumeController(mContext, volumeControl, muteBtn); // TODO
+        volumeController = new VolumeController(mContext, volumeControlView, soundBackgroundController.getBgrSoundMediaPlayer(), muteBtn); // TODO
     }
 
     public StateController getStateController() {

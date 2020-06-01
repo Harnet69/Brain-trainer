@@ -13,13 +13,17 @@ public class SoundBackgroundController extends Service {
     private int backgroundSound;
     private Context mContext;
     private float speed = 1.00f;
+    private MediaPlayer bgrSoundMediaPlayer;
 
     public SoundBackgroundController(int backgroundSound, Context mContext) {
         this.backgroundSound = backgroundSound;
         this.mContext = mContext;
     }
 
-    MediaPlayer mp;
+    public MediaPlayer getBgrSoundMediaPlayer() {
+        return bgrSoundMediaPlayer;
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         // TODO Auto-generated method stub
@@ -27,30 +31,30 @@ public class SoundBackgroundController extends Service {
     }
     public void onCreate()
     {
-        mp = MediaPlayer.create(mContext, backgroundSound);
-        mp.setLooping(true);
+        bgrSoundMediaPlayer = MediaPlayer.create(mContext, backgroundSound);
+        bgrSoundMediaPlayer.setLooping(true);
     }
     public void onDestroy() {
-        mp.stop();
+        bgrSoundMediaPlayer.stop();
         resetSpeed();
     }
     public void onPause()
     {
-        if(mp != null) {
-            mp.pause();
+        if(bgrSoundMediaPlayer != null) {
+            bgrSoundMediaPlayer.pause();
         }
     }
     public void onStart(){
-        if(mp != null){
-            mp.start();
+        if(bgrSoundMediaPlayer != null){
+            bgrSoundMediaPlayer.start();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void speedUp(){
         speed += 0.2;
-        if(mp.isPlaying()){
-            mp.setPlaybackParams(mp.getPlaybackParams().setSpeed(speed));
+        if(bgrSoundMediaPlayer.isPlaying()){
+            bgrSoundMediaPlayer.setPlaybackParams(bgrSoundMediaPlayer.getPlaybackParams().setSpeed(speed));
         }
     }
 
