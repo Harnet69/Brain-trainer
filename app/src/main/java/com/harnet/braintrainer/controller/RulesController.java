@@ -7,10 +7,10 @@ public class RulesController {
     private MediaPlayer wrongAnswerSound;
     private MediaPlayer nextLevel;
 
-    public RulesController(MediaPlayer rightAnswerSound, MediaPlayer wrongAnswerSound, MediaPlayer nextLevel) {
-        this.rightAnswerSound = rightAnswerSound;
-        this.wrongAnswerSound = wrongAnswerSound;
-        this.nextLevel= nextLevel;
+    public RulesController(SoundController soundController) {
+        this.rightAnswerSound = soundController.getRightAnswerSound();
+        this.wrongAnswerSound = soundController.getWrongAnswerSound();
+        this.nextLevel= soundController.getNextLevelSound();
     }
 
     // check result of single task

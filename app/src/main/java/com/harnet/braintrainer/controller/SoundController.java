@@ -14,38 +14,38 @@ import com.harnet.braintrainer.model.Sounds;
 public class SoundController extends Service {
     private Context mContext;
     private float speed = 1.00f;
-    private MediaPlayer bgrSoundMediaPlayer;
-    private MediaPlayer rightAnswer;
-    private MediaPlayer wrongAnswer;
-    private MediaPlayer nextLevel;
-    private MediaPlayer nextGeneralLevel;
+    private MediaPlayer bgrSound;
+    private MediaPlayer rightAnswerSound;
+    private MediaPlayer wrongAnswerSound;
+    private MediaPlayer nextLevelSound;
+    private MediaPlayer nextGeneralLevelSound;
 
     public SoundController(Context mContext) {
         this.mContext = mContext;
-        rightAnswer = MediaPlayer.create(mContext, Sounds.ANSWER_TRUE.getSound());
-        wrongAnswer = MediaPlayer.create(mContext, Sounds.ANSWER_FALSE.getSound());
-        nextLevel = MediaPlayer.create(mContext, Sounds.NEXT_LEVEL.getSound());
-        nextGeneralLevel = MediaPlayer.create(mContext, Sounds.NEXT_GENERAL_LEVEL.getSound());
+        rightAnswerSound = MediaPlayer.create(mContext, Sounds.ANSWER_TRUE.getSound());
+        wrongAnswerSound = MediaPlayer.create(mContext, Sounds.ANSWER_FALSE.getSound());
+        nextLevelSound = MediaPlayer.create(mContext, Sounds.NEXT_LEVEL.getSound());
+        nextGeneralLevelSound = MediaPlayer.create(mContext, Sounds.NEXT_GENERAL_LEVEL.getSound());
     }
 
-    public MediaPlayer getBgrSoundMediaPlayer() {
-        return bgrSoundMediaPlayer;
+    public MediaPlayer getBgrSound() {
+        return bgrSound;
     }
 
-    public MediaPlayer getRightAnswer() {
-        return rightAnswer;
+    public MediaPlayer getRightAnswerSound() {
+        return rightAnswerSound;
     }
 
-    public MediaPlayer getWrongAnswer() {
-        return wrongAnswer;
+    public MediaPlayer getWrongAnswerSound() {
+        return wrongAnswerSound;
     }
 
-    public MediaPlayer getNextLevel() {
-        return nextLevel;
+    public MediaPlayer getNextLevelSound() {
+        return nextLevelSound;
     }
 
-    public MediaPlayer getNextGeneralLevel() {
-        return nextGeneralLevel;
+    public MediaPlayer getNextGeneralLevelSound() {
+        return nextGeneralLevelSound;
     }
 
     @Override
@@ -53,33 +53,33 @@ public class SoundController extends Service {
         // TODO Auto-generated method stub
         return null;
     }
-    // creame mediaplayers when onCreate state of app
+
     public void onCreate()
     {
-        bgrSoundMediaPlayer = MediaPlayer.create(mContext, Sounds.BACKGROUND_MUSIC.getSound());
-        bgrSoundMediaPlayer.setLooping(true);
+        bgrSound = MediaPlayer.create(mContext, Sounds.BACKGROUND_MUSIC.getSound());
+        bgrSound.setLooping(true);
     }
     public void onDestroy() {
-        bgrSoundMediaPlayer.stop();
+        bgrSound.stop();
         resetSpeed();
     }
     public void onPause()
     {
-        if(bgrSoundMediaPlayer != null) {
-            bgrSoundMediaPlayer.pause();
+        if(bgrSound != null) {
+            bgrSound.pause();
         }
     }
     public void onStart(){
-        if(bgrSoundMediaPlayer != null){
-            bgrSoundMediaPlayer.start();
+        if(bgrSound != null){
+            bgrSound.start();
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void speedUp(){
         speed += 0.2;
-        if(bgrSoundMediaPlayer.isPlaying()){
-            bgrSoundMediaPlayer.setPlaybackParams(bgrSoundMediaPlayer.getPlaybackParams().setSpeed(speed));
+        if(bgrSound.isPlaying()){
+            bgrSound.setPlaybackParams(bgrSound.getPlaybackParams().setSpeed(speed));
         }
     }
 

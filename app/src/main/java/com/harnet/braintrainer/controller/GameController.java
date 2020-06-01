@@ -55,13 +55,13 @@ public class GameController {
         scoreController = new ScoreController(scoreTextView);
         soundController = new SoundController(mContext);
         answerController = new AnswerController(answerGridLayout);
-        rulesController = new RulesController( soundController.getRightAnswer(), soundController.getWrongAnswer(), soundController.getNextLevel());
-        levelController = new LevelController(levelView, rulesController, levelNumtextView, soundController.getNextGeneralLevel()); // level controller
+        rulesController = new RulesController( soundController);
+        levelController = new LevelController(levelView, rulesController, levelNumtextView, soundController.getNextGeneralLevelSound()); // level controller
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundController, taskTextView);
         stateController = new StateController(soundController, timerController); // manage app states
-        volumeController = new VolumeController(mContext, volumeControlView, soundController.getBgrSoundMediaPlayer(), muteBtn); // TODO
+        volumeController = new VolumeController(mContext, volumeControlView, soundController.getBgrSound(), muteBtn); // TODO
     }
 
     public StateController getStateController() {
