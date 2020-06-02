@@ -22,6 +22,7 @@ public class VolumeController {
     private boolean isSoundMute;
 
     public VolumeController(Context mContext, SeekBar volumeControl, MediaPlayer bgrSoundMediaPlayer, Button muteBtnView) {
+        //TODO use default volume control buttons for appear and disappear volume controller, according to Matherial desingn
         mediaPlayer = bgrSoundMediaPlayer;
         audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
 
