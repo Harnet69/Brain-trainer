@@ -93,7 +93,9 @@ public class TimerController {
     }
 
     public void pauseTimer(){
-        gameTimer.cancel();
+        if(gameTimer != null){
+            gameTimer.cancel();
+        }
 //        gameTimer.pause();
         // TODO implement saving rests time, invoke timer.cancel() for inPause state and timer.start() for inResume()
     }
