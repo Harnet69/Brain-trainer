@@ -16,12 +16,14 @@ public class GearController {
 
 
     public void startSpinning(int spinDuration){
-        gearImageView.animate().rotationBy(7200).translationXBy(-40).translationYBy(+350).setDuration(spinDuration*1000)
-                .setInterpolator(new LinearInterpolator());
+//        gearImageView.animate().rotationBy(7200).translationXBy(-40).translationYBy(+350).setDuration(spinDuration*1000)
+//                .setInterpolator(new LinearInterpolator());
+        gearImageView.animate().rotationBy(7200).setDuration(spinDuration*1000).setInterpolator(new LinearInterpolator());
     }
 
     public void cancelPosition(){
-        gearImageView.animate().rotationBy(-360).translationXBy(40).translationYBy(-350).setDuration(500);
+//        gearImageView.animate().rotationBy(-360).translationXBy(40).translationYBy(-350).setDuration(500);
+        gearImageView.setRotation(0);
     }
 
     public void changeGearImageView(int[] levelImages, int levelImage){
