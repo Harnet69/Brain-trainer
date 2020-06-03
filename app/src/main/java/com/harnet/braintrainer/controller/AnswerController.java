@@ -24,13 +24,14 @@ public class AnswerController {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generateAnswers(int rightResult) {
         int[] answers = new int[answerGridLayout.getChildCount()];
+        // TODO check the quantity of childs
         answers = fillAnswersArray(answers, rightResult);
         for (int i = 0; i < answerGridLayout.getChildCount(); i++) {
             View subView = answerGridLayout.getChildAt(i);
             if (subView instanceof TextView) {
                 ((TextView) subView).setText(String.valueOf(answers[i]));
                 subView.setTag(String.valueOf(answers[i]));
-                subView.setSoundEffectsEnabled(false); // TODO disabled default click sound
+                subView.setSoundEffectsEnabled(false);
             }
         }
     }
@@ -38,14 +39,17 @@ public class AnswerController {
     // add to answers array one correct answer and mix it with incorrect
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private int[] fillAnswersArray(int[] answers, int rightResult) {
-        Random rand = new Random();
         answers[0] = rightResult;
+        int attempts = 0;
         for (int i = 1; i < answers.length; i++) {
-//            answers[i] = rand.nextInt(Math.abs(rightResult+10-(rightResult-2)));
-            answers[i] = ThreadLocalRandom.current().nextInt((rightResult/2)-5, Math.abs((rightResult * 2)+5));
-            if (isNumInArray(answers, answers[i])) {
-                answers[i]+=1;
+            int wrongAnswer = ThreadLocalRandom.current().nextInt((rightResult / 2) - 5, Math.abs((rightResult * 2) + 5));
+            while (isNumInArray(answers, wrongAnswer) && attempts <=3) {
+                wrongAnswer = ThreadLocalRandom.current().nextInt((rightResult / 2) - 5, Math.abs((rightResult * 2) + 5));
+                attempts++;
             }
+            Log.d(TAG, "fillAnswersArray: " + wrongAnswer);
+            answers[i] = wrongAnswer+1;
+            attempts = 0;
         }
         return shuffleAnswers(answers);
     }
@@ -64,9 +68,11 @@ public class AnswerController {
     }
 
     // check if all elements are unique
-    private boolean isNumInArray(int[] answers, int i) {
-        for (int num : answers) {
-            return i == num;
+    private boolean isNumInArray(int[] answers, int answer) {
+        for (int value : answers) {
+            if(value == answer){ // TODO cause of a crash
+                return true;
+            }
         }
         return false;
     }
