@@ -16,6 +16,7 @@ public class GearController {
 
 
     public void startSpinning(int spinDuration){
+        Log.d(TAG, "Test: startSpinning: ");
 //        gearImageView.animate().rotationBy(7200).translationXBy(-40).translationYBy(+350).setDuration(spinDuration*1000)
 //                .setInterpolator(new LinearInterpolator());
         gearImageView.animate().rotationBy(7200).setDuration(spinDuration*1000).setInterpolator(new LinearInterpolator());

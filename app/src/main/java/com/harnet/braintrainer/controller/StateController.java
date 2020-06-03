@@ -3,7 +3,6 @@ package com.harnet.braintrainer.controller;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -31,7 +30,9 @@ public class StateController extends Service {
         taskController.showHideTask();
     }
 
-
+    public void onStop(){
+        Game.getInstance().setGame(false);
+    }
 
     public void onResume(){
         if (Game.getInstance().isGame()) {

@@ -1,6 +1,5 @@
 package com.harnet.braintrainer.controller;
 
-import android.media.MediaPlayer;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +22,7 @@ public class AnswerController {
     // add texts and tags to buttons with numbers from answers array
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void generateAnswers(int rightResult) {
+        Log.d(TAG, "Test: generateAnswers: ");
         int[] answers = new int[answerGridLayout.getChildCount()];
         // TODO check the quantity of childs
         answers = fillAnswersArray(answers, rightResult);
@@ -70,7 +70,7 @@ public class AnswerController {
     // check if all elements are unique
     private boolean isNumInArray(int[] answers, int answer) {
         for (int value : answers) {
-            if(value == answer){ // TODO cause of a crash
+            if(value == answer){
                 return true;
             }
         }
@@ -78,10 +78,17 @@ public class AnswerController {
     }
 
     public void hideShowAnswers(){
+        Log.d(TAG, "Test: hideShowAnswers: ");
         if(answerGridLayout.isShown()){
             answerGridLayout.setVisibility(View.INVISIBLE);
         }else{
             answerGridLayout.setVisibility(View.VISIBLE);
         }
     }
+
+    public void showAnswers(){
+        answerGridLayout.setVisibility(View.VISIBLE);
+
+    }
+
 }

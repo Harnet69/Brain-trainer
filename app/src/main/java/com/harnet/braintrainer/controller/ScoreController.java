@@ -1,9 +1,11 @@
 package com.harnet.braintrainer.controller;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.widget.TextView;
 
 public class ScoreController {
+    private static final String TAG = "ScoreController";
     private TextView scoreTextView;
     private int rightAnswers;
     private int wrongAnswers;
@@ -32,6 +34,7 @@ public class ScoreController {
 
     // reset scores
     public void resetScore(){
+        Log.d(TAG, "Test: resetScore: ");
         rightAnswers = 0;
         wrongAnswers = 0;
         updateScoreView();

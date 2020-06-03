@@ -3,6 +3,7 @@ package com.harnet.braintrainer.controller;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class TimerController {
 
     // start timer
     public void startTimer() {
+        Log.d(TAG, " Test: startTimer: ");
         soundController.onStart();
         gameTimer = new CountDownTimer(restTime * 1000, countDownInterval) {
             @RequiresApi(api = Build.VERSION_CODES.M)

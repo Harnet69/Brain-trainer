@@ -1,6 +1,7 @@
 package com.harnet.braintrainer.controller;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.harnet.braintrainer.model.Level;
 import com.harnet.braintrainer.model.Task;
 
 public class TaskController {
+    private static final String TAG = "TaskController";
     private Task task;
     private TextView taskTextView;
     private Level level;
@@ -22,6 +24,7 @@ public class TaskController {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public int showNewTask(int minBound, int maxBound){
+        Log.d(TAG, "Test: showNewTask: ");
         taskTextView.setText(task.generateTask(minBound, maxBound));
         return task.calculateResult();
     }

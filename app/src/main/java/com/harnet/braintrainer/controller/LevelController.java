@@ -1,6 +1,7 @@
 package com.harnet.braintrainer.controller;
 
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,6 +65,7 @@ public class LevelController {
 
     // fill level icons grid by icons
     public void fillLevelsByIcons() {
+        Log.d(TAG, "Test: fillLevelsByIcons: ");
         for (int i = 0; i < levelView.getChildCount(); i++) {
             final View subView = levelView.getChildAt(i);
             if (subView instanceof ImageView) {

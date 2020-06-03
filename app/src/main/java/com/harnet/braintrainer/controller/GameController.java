@@ -61,7 +61,7 @@ public class GameController {
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundController, taskTextView);
         stateController = new StateController(soundController, timerController, answerController, taskController); // manage app states
-        volumeController = new VolumeController(mContext, volumeControlView, soundController.getBgrSound(), muteBtn); // TODO
+        volumeController = new VolumeController(mContext, volumeControlView, soundController.getBgrSound(), muteBtn);
     }
 
     public StateController getStateController() {
@@ -69,6 +69,7 @@ public class GameController {
     }
 
     public void startGame() {
+
         gearImageView.setOnClickListener(null);
         gearImageView.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -90,7 +91,7 @@ public class GameController {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void startNewGame(){
         timerController.startTimer();// start the countDown timer
-        answerGridLayout.setVisibility(View.VISIBLE);
+        answerController.hideShowAnswers();
         rightResult = taskController.showNewTask(levelController.getLevel().getMinBound(), levelController.getLevel().getMaxBound());// create a new task and return the result
         answerController.generateAnswers(rightResult);
         addClickListenerToBtns();
@@ -101,6 +102,7 @@ public class GameController {
 
     // add click listeners to buttons
     public void addClickListenerToBtns(){
+        Log.d(TAG, "Test: addClickListenerToBtns: ");
         for (int i = 0; i < answerGridLayout.getChildCount(); i++) {
             final View subView = answerGridLayout.getChildAt(i);
             if (subView instanceof TextView) {
