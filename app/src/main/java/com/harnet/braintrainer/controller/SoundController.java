@@ -26,6 +26,7 @@ public class SoundController extends Service {
         wrongAnswerSound = MediaPlayer.create(mContext, Sounds.ANSWER_FALSE.getSound());
         nextLevelSound = MediaPlayer.create(mContext, Sounds.NEXT_LEVEL.getSound());
         nextGeneralLevelSound = MediaPlayer.create(mContext, Sounds.NEXT_GENERAL_LEVEL.getSound());
+        onCreate();
     }
 
     public MediaPlayer getBgrSound() {

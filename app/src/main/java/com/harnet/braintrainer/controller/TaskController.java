@@ -1,6 +1,7 @@
 package com.harnet.braintrainer.controller;
 
 import android.os.Build;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -23,5 +24,13 @@ public class TaskController {
     public int showNewTask(int minBound, int maxBound){
         taskTextView.setText(task.generateTask(minBound, maxBound));
         return task.calculateResult();
+    }
+
+    public void showHideTask(){
+        if(taskTextView.isShown()){
+            taskTextView.setVisibility(View.INVISIBLE);
+        }else{
+            taskTextView.setVisibility(View.VISIBLE);
+        }
     }
 }

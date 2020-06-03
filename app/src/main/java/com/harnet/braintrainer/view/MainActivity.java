@@ -15,7 +15,6 @@ import com.harnet.braintrainer.controller.GameController;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    private Button goBtn;
     private TextView timerTextView;
     private TextView taskTextView;
     private TextView scoreTextView;
@@ -34,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+
         taskTextView = findViewById(R.id.taskTextView);
         timerTextView = findViewById(R.id.timerTextView);
         scoreTextView = findViewById(R.id.scoreTextView);
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         volumeControl = findViewById(R.id.volumeControl);
 
         gameController = new GameController(getApplicationContext(), taskTextView, timerTextView, scoreTextView,
-                            answerGridLayout, gearImageView, levelView, levelNumtextView, muteBtn, volumeControl);
+                answerGridLayout, gearImageView, levelView, levelNumtextView, muteBtn, volumeControl);
 
         gameController.startGame();
     }
@@ -57,8 +59,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
     protected void onPostResume() {
         super.onPostResume();
         gameController.getStateController().onResume();
+    }
+
+    // back stack (go to parent arrow) controller
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

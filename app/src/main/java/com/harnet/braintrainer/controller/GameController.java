@@ -60,7 +60,7 @@ public class GameController {
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundController, taskTextView);
-        stateController = new StateController(soundController, timerController); // manage app states
+        stateController = new StateController(soundController, timerController, answerController, taskController); // manage app states
         volumeController = new VolumeController(mContext, volumeControlView, soundController.getBgrSound(), muteBtn); // TODO
     }
 
@@ -75,7 +75,7 @@ public class GameController {
             @Override
             public void onClick(View v) {
                 if(!Game.getInstance().isGame()){
-                    soundController.onCreate();
+//                    soundController.onCreate();
                     startNewGame();
                     Game.getInstance().setGame(true);
                 }else{

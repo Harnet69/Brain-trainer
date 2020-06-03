@@ -76,4 +76,12 @@ public class AnswerController {
         }
         return false;
     }
+
+    public void hideShowAnswers(){
+        if(answerGridLayout.isShown()){
+            answerGridLayout.setVisibility(View.INVISIBLE);
+        }else{
+            answerGridLayout.setVisibility(View.VISIBLE);
+        }
+    }
 }
