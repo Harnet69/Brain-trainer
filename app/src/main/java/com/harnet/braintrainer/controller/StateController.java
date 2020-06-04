@@ -43,6 +43,14 @@ public class StateController extends Service {
         }
     }
 
+    public void onDestroy(){
+        Game.getInstance().setGame(false);
+        soundController.onDestroy();
+        timerController.resetTimer();
+        answerController.hideShowAnswers();
+        taskController.showHideTask();
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

@@ -1,6 +1,7 @@
 package com.harnet.braintrainer.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,7 +16,7 @@ import com.harnet.braintrainer.controller.GameController;
 import com.harnet.braintrainer.model.Game;
 
 public class MathActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "MainActivity?";
     private TextView timerTextView;
     private TextView taskTextView;
     private TextView scoreTextView;
@@ -56,19 +57,31 @@ public class MathActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+//        Log.d(TAG, "onPause: ");
         gameController.getStateController().onPause();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Game.getInstance().setGame(false);
+//        Log.d(TAG, "onStop: ");
+        gameController.getStateController().onPause();
+//        Game.getInstance().setGame(false);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+//        Log.d(TAG, "onResume: ");
         gameController.getStateController().onResume();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        Log.d(TAG, "onDestroy: ");
+        gameController.getStateController().onDestroy();
     }
 
     // back stack (go to parent arrow) controller
