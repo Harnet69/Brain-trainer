@@ -1,5 +1,5 @@
 # Brain trainer
-   The game gives a possibility to keep your mind in a good condition and shape your brain via ariphmetic excercises.
+   The game gives a possibility to keep your mind in a good condition and shape your brain via arithmetic exercises.
 
 ## Features
 * Cool UI
