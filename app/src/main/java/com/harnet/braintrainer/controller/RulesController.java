@@ -1,26 +1,15 @@
 package com.harnet.braintrainer.controller;
-import android.media.MediaPlayer;
 import android.widget.TextView;
 
 public class RulesController {
-    private MediaPlayer rightAnswerSound;
-    private MediaPlayer wrongAnswerSound;
-    private MediaPlayer nextLevel;
+    private final int RIGHT_ANSWERS_PERCENTAGE = 20;
+    private final int MIN_RIGHT_ANSWERS_QUANTITY = 7;
+    private final int MAX_WRONG_ANSWERS_QUANTITY = 7;
 
-    public RulesController(SoundController soundController) {
-        this.rightAnswerSound = soundController.getRightAnswerSound();
-        this.wrongAnswerSound = soundController.getWrongAnswerSound();
-        this.nextLevel= soundController.getNextLevelSound();
-    }
 
     // check result of single task
     public boolean checkSingleResult(TextView textView, int rightResult) {
-        if(Integer.parseInt((String) textView.getTag()) == rightResult){
-            rightAnswerSound.start();
-        }else{
-            wrongAnswerSound.start();
-        }
-        return (Integer.parseInt((String) textView.getTag()) == rightResult);
+        return Integer.parseInt((String) textView.getTag()) == rightResult;
     }
 
     // wrong answers <=3 and <10% of all answers & rightAnswers >=7
@@ -28,9 +17,7 @@ public class RulesController {
         if(rightAnswers == 0 && wrongAnswers == 0){
             return false;
         }
-        if((wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 20 && wrongAnswers <=3 && rightAnswers >= 7){
-            nextLevel.start();
-        }
-        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= 20 && wrongAnswers <=3 && rightAnswers >= 7 ;
+        return (wrongAnswers*100)/(rightAnswers+wrongAnswers) <= RIGHT_ANSWERS_PERCENTAGE &&
+                wrongAnswers <=MAX_WRONG_ANSWERS_QUANTITY && rightAnswers >= MIN_RIGHT_ANSWERS_QUANTITY ;
     }
 }

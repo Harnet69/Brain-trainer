@@ -19,14 +19,14 @@ public class LevelController {
     private LinearLayout levelView;
     private RulesController gameRulesController;
     private TextView levelNumtextView;
-    private MediaPlayer nextGeneralLevelSound;
+    private  SoundController soundController;
 
-    public LevelController(LinearLayout levelView, RulesController gameRulesController, TextView levelNumtextView, MediaPlayer nextGeneralLevelSound) {
+    public LevelController(LinearLayout levelView, RulesController gameRulesController, TextView levelNumtextView, SoundController soundController) {
         this.levelView = levelView;
         this.gameRulesController = gameRulesController;
         this.levelNumtextView = levelNumtextView;
-        this.nextGeneralLevelSound = nextGeneralLevelSound;
         this.level = new Level(0);
+        this.soundController = soundController;
     }
 
     public int[] getLevelImages() {
@@ -40,10 +40,25 @@ public class LevelController {
     public boolean addNextLevel(int rightAnswers, int wrongAnswers) {
         if (gameRulesController.checkGameSessionResult(rightAnswers, wrongAnswers)) {
             level.up();
+            soundController.makeNextLevelSound();
+            soundController.stopBgrSound();
             updateLevelIcons();
             return true;
         }
         return false;
+    }
+
+
+    // method to do general level up
+    public void generalLevelUp(){
+        resetLevel();
+        resetLevelBounds();
+        resetLevelIcons();
+        upMultipl();
+        changeLevelIcon();
+        upGeneralLevel();
+        soundController.makeNextGeneralLevelSound();
+        soundController.stopBgrSound();
     }
 
     public void resetLevel() {
@@ -101,16 +116,5 @@ public class LevelController {
     public void upGeneralLevel(){
         level.setGeneralLevelNum(level.getGeneralLevelNum() + 1);
         setGeneralLevel();
-    }
-
-    // method to do general level up
-    public void generalLevelUp(){
-        resetLevel();
-        resetLevelBounds();
-        resetLevelIcons();
-        upMultipl();
-        changeLevelIcon();
-        upGeneralLevel();
-        nextGeneralLevelSound.start();
     }
 }

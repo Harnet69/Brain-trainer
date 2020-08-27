@@ -55,8 +55,8 @@ public class GameController {
         scoreController = new ScoreController(scoreTextView);
         soundController = new SoundController(mContext);
         answerController = new AnswerController(answerGridLayout);
-        rulesController = new RulesController( soundController);
-        levelController = new LevelController(levelView, rulesController, levelNumtextView, soundController.getNextGeneralLevelSound()); // level controller
+        rulesController = new RulesController();
+        levelController = new LevelController(levelView, rulesController, levelNumtextView, soundController); // level controller
         gearController = new GearController(gearImageView);
         taskController = new TaskController(taskTextView, levelController.getLevel());
         timerController = new TimerController(new Timer(duration), timerTextView, answerGridLayout, gearController, levelController, scoreController, soundController, taskTextView);
@@ -98,6 +98,8 @@ public class GameController {
         scoreController.resetScore();
         gearController.startSpinning(timerController.getTimerDuration());
         levelController.fillLevelsByIcons();
+        soundController.startBgrSound();
+        Log.d(TAG, "startNewGame: background sound???");
     }
 
     // add click listeners to buttons
@@ -121,6 +123,7 @@ public class GameController {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void serveMovement(TextView viewWithResult){
         boolean isAnswerRight = rulesController.checkSingleResult(viewWithResult, rightResult);//check users move
+        soundController.answerSound(isAnswerRight); // make an answers sound
         scoreController.addScore(isAnswerRight);// add a score
         rightResult = taskController.showNewTask(levelController.getLevel().getMinBound(), levelController.getLevel().getMaxBound());// create a new task //TODO hardcode
         answerController.generateAnswers(rightResult);// generate new answers

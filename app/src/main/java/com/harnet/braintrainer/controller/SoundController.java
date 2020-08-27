@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi;
 import com.harnet.braintrainer.model.Sounds;
 
 public class SoundController extends Service {
+    private static final String TAG = "SoundController";
     private Context mContext;
     private float speed = 1.00f;
     private MediaPlayer bgrSound;
@@ -26,27 +27,12 @@ public class SoundController extends Service {
         wrongAnswerSound = MediaPlayer.create(mContext, Sounds.ANSWER_FALSE.getSound());
         nextLevelSound = MediaPlayer.create(mContext, Sounds.NEXT_LEVEL.getSound());
         nextGeneralLevelSound = MediaPlayer.create(mContext, Sounds.NEXT_GENERAL_LEVEL.getSound());
-        onCreate();
+        bgrSound = MediaPlayer.create(mContext, Sounds.BACKGROUND_MUSIC.getSound());
+            bgrSound.setLooping(true);
     }
 
     public MediaPlayer getBgrSound() {
         return bgrSound;
-    }
-
-    public MediaPlayer getRightAnswerSound() {
-        return rightAnswerSound;
-    }
-
-    public MediaPlayer getWrongAnswerSound() {
-        return wrongAnswerSound;
-    }
-
-    public MediaPlayer getNextLevelSound() {
-        return nextLevelSound;
-    }
-
-    public MediaPlayer getNextGeneralLevelSound() {
-        return nextGeneralLevelSound;
     }
 
     @Override
@@ -55,25 +41,37 @@ public class SoundController extends Service {
         return null;
     }
 
-    public void onCreate()
-    {
-        bgrSound = MediaPlayer.create(mContext, Sounds.BACKGROUND_MUSIC.getSound());
-        bgrSound.setLooping(true);
+//    public void onCreate()
+//    {
+//        bgrSound = MediaPlayer.create(mContext, Sounds.BACKGROUND_MUSIC.getSound());
+//        bgrSound.setLooping(true);
+//    }
+//    public void onDestroy() {
+//        bgrSound.stop();
+//        resetSpeed();
+//    }
+//    public void onPause()
+//    {
+//        if(bgrSound != null) {
+//            bgrSound.pause();
+//        }
+//    }
+//    public void onStart(){
+//        if(bgrSound != null){
+//            bgrSound.start();
+//        }
+//    }
+
+    public void startBgrSound(){
+        bgrSound.start();
     }
-    public void onDestroy() {
+
+    public void pauseBgrSound(){
+        bgrSound.pause();
+    }
+
+    public void stopBgrSound(){
         bgrSound.stop();
-        resetSpeed();
-    }
-    public void onPause()
-    {
-        if(bgrSound != null) {
-            bgrSound.pause();
-        }
-    }
-    public void onStart(){
-        if(bgrSound != null){
-            bgrSound.start();
-        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -87,4 +85,21 @@ public class SoundController extends Service {
     public void resetSpeed(){
         speed = 1;
     }
+
+    public void answerSound(boolean isAnswerRight){
+        if(isAnswerRight){
+            rightAnswerSound.start();
+        }else{
+            wrongAnswerSound.start();
+        }
+    }
+
+    public void makeNextLevelSound(){
+        nextLevelSound.start();
+    }
+
+    public void makeNextGeneralLevelSound(){
+        nextGeneralLevelSound.start();
+    }
 }
+

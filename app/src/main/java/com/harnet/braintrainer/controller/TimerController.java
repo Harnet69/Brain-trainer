@@ -52,7 +52,6 @@ public class TimerController {
     // start timer
     public void startTimer() {
         Log.d(TAG, " Test: startTimer: ");
-        soundController.onStart();
         gameTimer = new CountDownTimer(restTime * 1000, countDownInterval) {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
@@ -83,7 +82,6 @@ public class TimerController {
                     levelController.generalLevelUp();
                     gearController.changeGearImageView(levelController.getLevelImages(), levelController.getLevel().getLevelImage()); // change image to the next
                 }
-                soundController.onDestroy();
             }
         }.start();
     }

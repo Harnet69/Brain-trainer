@@ -24,19 +24,21 @@ public class StateController extends Service {
     }
 
     public void onPause(){
-        soundController.onPause();
+        soundController.pauseBgrSound();
         timerController.pauseTimer();
         answerController.hideShowAnswers();
         taskController.showHideTask();
     }
 
     public void onStop(){
+        soundController.pauseBgrSound();
         Game.getInstance().setGame(false);
+
     }
 
     public void onResume(){
         if (Game.getInstance().isGame()) {
-            soundController.onStart();
+            soundController.startBgrSound();
             timerController.startTimer();
             answerController.hideShowAnswers();
             taskController.showHideTask();
@@ -45,7 +47,7 @@ public class StateController extends Service {
 
     public void onDestroy(){
         Game.getInstance().setGame(false);
-        soundController.onDestroy();
+        soundController.stopBgrSound();
         timerController.resetTimer();
         answerController.hideShowAnswers();
         taskController.showHideTask();
